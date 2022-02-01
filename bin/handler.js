@@ -40,15 +40,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
-var examples_1 = __importDefault(require("./examples"));
 var path_1 = __importDefault(require("path"));
 var child_process_1 = require("child_process");
 var inquirer_1 = __importDefault(require("inquirer"));
 var chalk_1 = __importDefault(require("chalk"));
 function handler(lang, module, example, name) {
     return __awaiter(this, void 0, void 0, function () {
+        var examples;
         var _this = this;
         return __generator(this, function (_a) {
+            examples = require(path_1.default.resolve(__dirname, "examples.json"));
             console.log(chalk_1.default.gray("Language: "), chalk_1.default.green(lang));
             console.log(chalk_1.default.gray("Folder name: "), chalk_1.default.green(name));
             console.log(chalk_1.default.gray("Example: "), chalk_1.default.green(example));
@@ -69,20 +70,20 @@ function handler(lang, module, example, name) {
                         console.log(chalk_1.default.gray("Setting up..."));
                         start = new Date();
                         pathname = "".concat(path_1.default.resolve("./"), "/").concat(name);
-                        (0, child_process_1.execSync)("git clone ".concat(examples_1.default[lang][module][example].repo, ".git ").concat(pathname, " "), {
+                        (0, child_process_1.execSync)("git clone ".concat(examples[lang][module][example].repo, ".git ").concat(pathname, " "), {
                             stdio: [1],
                         });
-                        (0, child_process_1.execSync)("cd ".concat(pathname, " && ").concat(examples_1.default[lang][module][example].install), {
+                        (0, child_process_1.execSync)("cd ".concat(pathname, " && ").concat(examples[lang][module][example].install), {
                             stdio: [1],
                         });
                         console.clear();
                         console.log("Done in ".concat((new Date().getTime() - start.getTime()) / 1000, "s \u2728 "));
                         console.log("run `" +
-                            chalk_1.default.green("cd ".concat(name).concat(examples_1.default[lang][module][example].start
-                                ? " && " + examples_1.default[lang][module][example].start
+                            chalk_1.default.green("cd ".concat(name).concat(examples[lang][module][example].start
+                                ? " && " + examples[lang][module][example].start
                                 : "")) +
                             "` to get started");
-                        console.log("Find accompanying tutorial at ".concat(chalk_1.default.green(examples_1.default[lang][module][example].guide)));
+                        console.log("Find accompanying tutorial at ".concat(chalk_1.default.green(examples[lang][module][example].guide)));
                         console.log("Stuck somewhere? Join our discord at " +
                             chalk_1.default.green("https://discord.gg/thirdweb"));
                     }

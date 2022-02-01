@@ -1,6 +1,5 @@
-import examples from "./examples";
 import path from "path";
-import { exec, execSync } from "child_process";
+import { execSync } from "child_process";
 import inquirer from "inquirer";
 import chalk from "chalk";
 
@@ -10,6 +9,8 @@ export async function handler(
   example: string,
   name: string
 ) {
+  const examples = require(path.resolve(__dirname, "examples.json"));
+
   console.log(chalk.gray("Language: "), chalk.green(lang));
   console.log(chalk.gray("Folder name: "), chalk.green(name));
   console.log(chalk.gray("Example: "), chalk.green(example));

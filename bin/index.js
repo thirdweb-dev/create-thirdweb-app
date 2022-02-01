@@ -41,65 +41,84 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var inquirer_1 = __importDefault(require("inquirer"));
-var examples_1 = __importDefault(require("./examples"));
+var fs_1 = __importDefault(require("fs"));
+var node_fetch_1 = __importDefault(require("node-fetch"));
 var handler_1 = require("./handler");
+var path_1 = __importDefault(require("path"));
 var generate = require("project-name-generator");
 var args = process.argv.slice(2);
 console.clear();
-switch (args[0]) {
-    case undefined:
-        var languageName_1;
-        var moduleName_1;
-        inquirer_1.default
-            .prompt([
-            {
-                type: "list",
-                name: "answer",
-                message: "Language?",
-                choices: Object.keys(examples_1.default),
-            },
-        ])
-            .then(function (language) {
-            languageName_1 = language.answer;
-            inquirer_1.default
-                .prompt([
-                {
-                    type: "list",
-                    name: "answer",
-                    message: "Module?",
-                    choices: Object.keys(examples_1.default[languageName_1]),
-                },
-            ])
-                .then(function (module) {
-                moduleName_1 = module.answer;
-                inquirer_1.default
-                    .prompt([
-                    {
-                        type: "list",
-                        name: "answer",
-                        message: "Example?",
-                        choices: Object.keys(examples_1.default[languageName_1][moduleName_1]),
-                    },
-                    {
-                        type: "input",
-                        name: "name",
-                        message: "Name of the app?",
-                        default: generate().dashed,
-                    },
-                ])
-                    .then(function (example) { return __awaiter(void 0, void 0, void 0, function () {
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0:
-                                console.clear();
-                                return [4 /*yield*/, (0, handler_1.handler)(languageName_1, moduleName_1, example.answer, example.name)];
-                            case 1:
-                                _a.sent();
-                                return [2 /*return*/];
+var examples;
+(0, node_fetch_1.default)("https://gist.githubusercontent.com/ayshptk/c0244844556fa43e8eacf737a678245f/raw/9d98239d65c552c0295066094df56eb9976891fa/test.json").then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, _b, _c;
+    return __generator(this, function (_d) {
+        switch (_d.label) {
+            case 0:
+                _b = (_a = fs_1.default).writeFile;
+                _c = [path_1.default.resolve(__dirname, "examples.json")];
+                return [4 /*yield*/, res.text()];
+            case 1:
+                _b.apply(_a, _c.concat([_d.sent(), function (err) {
+                        examples = require(path_1.default.resolve(__dirname, "examples.json"));
+                        switch (args[0]) {
+                            case undefined:
+                                var languageName_1;
+                                var moduleName_1;
+                                inquirer_1.default
+                                    .prompt([
+                                    {
+                                        type: "list",
+                                        name: "answer",
+                                        message: "Language?",
+                                        choices: Object.keys(examples),
+                                    },
+                                ])
+                                    .then(function (language) {
+                                    languageName_1 = language.answer;
+                                    inquirer_1.default
+                                        .prompt([
+                                        {
+                                            type: "list",
+                                            name: "answer",
+                                            message: "Module?",
+                                            choices: Object.keys(examples[languageName_1]),
+                                        },
+                                    ])
+                                        .then(function (module) {
+                                        moduleName_1 = module.answer;
+                                        inquirer_1.default
+                                            .prompt([
+                                            {
+                                                type: "list",
+                                                name: "answer",
+                                                message: "Example?",
+                                                choices: Object.keys(examples[languageName_1][moduleName_1]),
+                                            },
+                                            {
+                                                type: "input",
+                                                name: "name",
+                                                message: "Name of the app?",
+                                                default: generate().dashed,
+                                            },
+                                        ])
+                                            .then(function (example) { return __awaiter(void 0, void 0, void 0, function () {
+                                            return __generator(this, function (_a) {
+                                                switch (_a.label) {
+                                                    case 0:
+                                                        console.clear();
+                                                        return [4 /*yield*/, (0, handler_1.handler)(languageName_1, moduleName_1, example.answer, example.name)];
+                                                    case 1:
+                                                        _a.sent();
+                                                        return [2 /*return*/];
+                                                }
+                                            });
+                                        }); });
+                                    });
+                                });
+                                break;
                         }
-                    });
-                }); });
-            });
-        });
-        break;
-}
+                    }]));
+                return [2 /*return*/];
+        }
+    });
+}); });
