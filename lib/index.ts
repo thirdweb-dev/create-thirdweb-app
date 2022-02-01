@@ -6,9 +6,13 @@ import fs from "fs";
 import fetch from "node-fetch";
 import { handler } from "./handler";
 import path from "path";
+import chalk from "chalk";
 var generate = require("project-name-generator");
 const args = process.argv.slice(2);
-inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
+inquirer.registerPrompt(
+  "autocomplete",
+  require("inquirer-autocomplete-prompt")
+);
 
 console.clear();
 let examples: any;
@@ -21,8 +25,8 @@ fetch(
     await res.text(),
     (err) => {
       examples = require(path.resolve(__dirname, "examples.json"));
-      switch (args[0]) {
-        case undefined:
+      switch (args.length) {
+        case 0:
           let languageName: string;
           let moduleName: string;
           inquirer
@@ -72,10 +76,25 @@ fetch(
                         example.answer,
                         example.name
                       );
+                    })
+                    .catch((err) => {
+                      console.clear();
+                      if (err.command) {
+                        console.log(`  ${chalk.cyan(err.command)} has failed.`);
+                      } else {
+                        console.log(
+                          chalk.red(
+                            "Unexpected error. Please report it as a bug:"
+                          )
+                        );
+                        console.log(err);
+                      }
                     });
                 });
             });
           break;
+        default:
+          console.log(chalk.red("Unexpected flag(s) :", args.join(" ")));
       }
     }
   );
