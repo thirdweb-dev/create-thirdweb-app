@@ -43,6 +43,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var inquirer_1 = __importDefault(require("inquirer"));
 var examples_1 = __importDefault(require("./examples"));
 var handler_1 = require("./handler");
+var generate = require("project-name-generator");
 var args = process.argv.slice(2);
 switch (args[0]) {
     case undefined:
@@ -82,15 +83,13 @@ switch (args[0]) {
                         type: "input",
                         name: "name",
                         message: "Name of the app?",
+                        default: generate().dashed,
                     },
                 ])
                     .then(function (example) { return __awaiter(void 0, void 0, void 0, function () {
                     return __generator(this, function (_a) {
                         switch (_a.label) {
-                            case 0:
-                                console.log(example.name);
-                                console.log(examples_1.default[languageName_1][moduleName_1][example.answer]);
-                                return [4 /*yield*/, (0, handler_1.handler)(languageName_1, moduleName_1, example.answer, example.name)];
+                            case 0: return [4 /*yield*/, (0, handler_1.handler)(languageName_1, moduleName_1, example.answer, example.name)];
                             case 1:
                                 _a.sent();
                                 return [2 /*return*/];

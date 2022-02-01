@@ -23,7 +23,8 @@
   },
   "homepage": "https://github.com/nftlabs/cli#readme",
   "dependencies": {
-    "inquirer": "^8.2.0"
+    "inquirer": "^8.2.0",
+    "project-name-generator": "^2.1.9"
   },
   "devDependencies": {
     "@types/inquirer": "^8.2.0",

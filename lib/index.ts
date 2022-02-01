@@ -4,7 +4,7 @@
 import inquirer from "inquirer";
 import examples from "./examples";
 import { handler } from "./handler";
-
+var generate = require("project-name-generator");
 const args = process.argv.slice(2);
 switch (args[0]) {
   case undefined:
@@ -44,11 +44,10 @@ switch (args[0]) {
                   type: "input",
                   name: "name",
                   message: "Name of the app?",
+                  default: generate().dashed,
                 },
               ])
               .then(async (example) => {
-                console.log(example.name);
-                console.log(examples[languageName][moduleName][example.answer]);
                 await handler(
                   languageName,
                   moduleName,

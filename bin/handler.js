@@ -45,15 +45,18 @@ var path_1 = __importDefault(require("path"));
 var child_process_1 = require("child_process");
 function handler(lang, module, example, name) {
     return __awaiter(this, void 0, void 0, function () {
-        var pathname;
+        var start, pathname;
         return __generator(this, function (_a) {
+            start = new Date();
             pathname = "".concat(path_1.default.resolve("./"), "/").concat(name);
             (0, child_process_1.execSync)("git clone ".concat(examples_1.default[lang][module][example].repo, ".git ").concat(pathname, " "), {
-                stdio: [0, 1, 2],
+                stdio: [0],
             });
             (0, child_process_1.execSync)("cd ".concat(pathname, " && ").concat(examples_1.default[lang][module][example].install), {
-                stdio: [0, 1, 2],
+                stdio: [0],
             });
+            console.log("Done in ".concat(new Date().getTime() - start.getTime(), "ms \u2728 "));
+            console.log("Find accompanying tutorial here: ".concat(examples_1.default[lang][module][example].guide));
             return [2 /*return*/];
         });
     });
