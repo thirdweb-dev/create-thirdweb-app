@@ -45,9 +45,10 @@ var fs_1 = __importDefault(require("fs"));
 var node_fetch_1 = __importDefault(require("node-fetch"));
 var handler_1 = require("./handler");
 var path_1 = __importDefault(require("path"));
+var chalk_1 = __importDefault(require("chalk"));
 var generate = require("project-name-generator");
 var args = process.argv.slice(2);
-inquirer_1.default.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
+inquirer_1.default.registerPrompt("autocomplete", require("inquirer-autocomplete-prompt"));
 console.clear();
 var examples;
 // TODO: change url to https://raw.githubusercontent.com/nftlabs/cli/main/lib/examples.json when repo is made public
@@ -62,8 +63,8 @@ var examples;
             case 1:
                 _b.apply(_a, _c.concat([_d.sent(), function (err) {
                         examples = require(path_1.default.resolve(__dirname, "examples.json"));
-                        switch (args[0]) {
-                            case undefined:
+                        switch (args.length) {
+                            case 0:
                                 var languageName_1;
                                 var moduleName_1;
                                 inquirer_1.default
@@ -114,10 +115,22 @@ var examples;
                                                         return [2 /*return*/];
                                                 }
                                             });
-                                        }); });
+                                        }); })
+                                            .catch(function (err) {
+                                            console.clear();
+                                            if (err.command) {
+                                                console.log("  ".concat(chalk_1.default.cyan(err.command), " has failed."));
+                                            }
+                                            else {
+                                                console.log(chalk_1.default.red("Unexpected error. Please report it as a bug:"));
+                                                console.log(err);
+                                            }
+                                        });
                                     });
                                 });
                                 break;
+                            default:
+                                console.log(chalk_1.default.red("Unexpected flag(s) :", args.join(" ")));
                         }
                     }]));
                 return [2 /*return*/];
