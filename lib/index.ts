@@ -6,6 +6,8 @@ import examples from "./examples";
 import { handler } from "./handler";
 var generate = require("project-name-generator");
 const args = process.argv.slice(2);
+console.clear();
+
 switch (args[0]) {
   case undefined:
     let languageName: string;
@@ -48,6 +50,7 @@ switch (args[0]) {
                 },
               ])
               .then(async (example) => {
+                console.clear();
                 await handler(
                   languageName,
                   moduleName,
