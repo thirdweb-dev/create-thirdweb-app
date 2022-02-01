@@ -47,9 +47,11 @@ var handler_1 = require("./handler");
 var path_1 = __importDefault(require("path"));
 var generate = require("project-name-generator");
 var args = process.argv.slice(2);
+inquirer_1.default.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 console.clear();
 var examples;
-(0, node_fetch_1.default)("https://gist.githubusercontent.com/ayshptk/c0244844556fa43e8eacf737a678245f/raw/9d98239d65c552c0295066094df56eb9976891fa/test.json").then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
+// TODO: change url to https://raw.githubusercontent.com/nftlabs/cli/main/lib/examples.json when repo is made public
+(0, node_fetch_1.default)("https://gist.githubusercontent.com/ayshptk/c0244844556fa43e8eacf737a678245f/raw/0caa36a56f153c0d6cdf75a15b3f28fde8d62766/create-thirdweb-app.json").then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, _b, _c;
     return __generator(this, function (_d) {
         switch (_d.label) {
