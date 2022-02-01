@@ -63,27 +63,27 @@ function handler(lang, module, example, name) {
                 },
             ])
                 .then(function (answers) { return __awaiter(_this, void 0, void 0, function () {
-                var start, pathname;
+                var start, pathname, ex, startCommand;
                 return __generator(this, function (_a) {
                     if (answers.confirm) {
                         console.clear();
                         console.log(chalk_1.default.gray("Setting up..."));
                         start = new Date();
                         pathname = "".concat(path_1.default.resolve("./"), "/").concat(name);
-                        (0, child_process_1.execSync)("git clone ".concat(examples[lang][module][example].repo, ".git ").concat(pathname, " "), {
+                        ex = examples[lang][module][example];
+                        (0, child_process_1.execSync)("git clone ".concat(ex.repo, ".git ").concat(pathname, " "), {
                             stdio: [1],
                         });
-                        (0, child_process_1.execSync)("cd ".concat(pathname, " && ").concat(examples[lang][module][example].install), {
+                        (0, child_process_1.execSync)("cd ".concat(pathname, " && ").concat(ex.install), {
                             stdio: [1],
                         });
                         console.clear();
                         console.log("Done in ".concat((new Date().getTime() - start.getTime()) / 1000, "s \u2728 "));
+                        startCommand = ex.start;
                         console.log("run `" +
-                            chalk_1.default.green("cd ".concat(name).concat(examples[lang][module][example].start
-                                ? " && " + examples[lang][module][example].start
-                                : "")) +
+                            chalk_1.default.green("cd ".concat(name).concat(startCommand ? " && " + startCommand : "")) +
                             "` to get started");
-                        console.log("Find accompanying tutorial at ".concat(chalk_1.default.green(examples[lang][module][example].guide)));
+                        console.log("Find accompanying tutorial at ".concat(chalk_1.default.green(ex.guide)));
                         console.log("Stuck somewhere? Join our discord at " +
                             chalk_1.default.green("https://discord.gg/thirdweb"));
                     }

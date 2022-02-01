@@ -27,41 +27,28 @@ export async function handler(
       if (answers.confirm) {
         console.clear();
         console.log(chalk.gray("Setting up..."));
-
         var start = new Date();
         const pathname = `${path.resolve("./")}/${name}`;
-        execSync(
-          `git clone ${examples[lang][module][example].repo}.git ${pathname} `,
-          {
-            stdio: [1],
-          }
-        );
-        execSync(
-          `cd ${pathname} && ${examples[lang][module][example].install}`,
-          {
-            stdio: [1],
-          }
-        );
+        const ex = examples[lang][module][example];
+        execSync(`git clone ${ex.repo}.git ${pathname} `, {
+          stdio: [1],
+        });
+        execSync(`cd ${pathname} && ${ex.install}`, {
+          stdio: [1],
+        });
         console.clear();
         console.log(
           `Done in ${(new Date().getTime() - start.getTime()) / 1000}s ✨ `
         );
+        const startCommand = ex.start;
         console.log(
           "run `" +
             chalk.green(
-              `cd ${name}${
-                examples[lang][module][example].start
-                  ? " && " + examples[lang][module][example].start
-                  : ""
-              }`
+              `cd ${name}${startCommand ? " && " + startCommand : ""}`
             ) +
             "` to get started"
         );
-        console.log(
-          `Find accompanying tutorial at ${chalk.green(
-            examples[lang][module][example].guide
-          )}`
-        );
+        console.log(`Find accompanying tutorial at ${chalk.green(ex.guide)}`);
         console.log(
           "Stuck somewhere? Join our discord at " +
             chalk.green(`https://discord.gg/thirdweb`)
