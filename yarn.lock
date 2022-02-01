@@ -2,11 +2,6 @@
 # yarn lockfile v1
 
 
-"@types/git-clone@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@types/git-clone/-/git-clone-0.2.0.tgz#7a7212ab3ed80ef6d558824d442af83d77d69568"
-  integrity sha512-RnYrs8sZWTBfeg8hAh5VwM3wEBlIaraQfo8h9FSxmX09KQ9VUDuL9AFzR3doV6IUMzEwjee6fOViIhqFvs1ulA==
-
 "@types/inquirer@^8.2.0":
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/@types/inquirer/-/inquirer-8.2.0.tgz#b9566d048f5ff65159f2ed97aff45fe0f00b35ec"

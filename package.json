@@ -26,7 +26,6 @@
     "inquirer": "^8.2.0"
   },
   "devDependencies": {
-    "@types/git-clone": "^0.2.0",
     "@types/inquirer": "^8.2.0",
     "typescript": "^4.4.3"
   }
