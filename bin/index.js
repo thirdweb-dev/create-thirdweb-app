@@ -46,9 +46,11 @@ var node_fetch_1 = __importDefault(require("node-fetch"));
 var handler_1 = require("./handler");
 var path_1 = __importDefault(require("path"));
 var chalk_1 = __importDefault(require("chalk"));
+var process_1 = require("process");
 var generate = require("project-name-generator");
 var args = process.argv.slice(2);
 inquirer_1.default.registerPrompt("autocomplete", require("inquirer-autocomplete-prompt"));
+var supportedCommands = [];
 console.clear();
 var examples;
 // TODO: change url to https://raw.githubusercontent.com/nftlabs/cli/main/lib/examples.json when repo is made public
@@ -130,7 +132,18 @@ var examples;
                                 });
                                 break;
                             default:
-                                console.log(chalk_1.default.red("Unexpected flag(s) :", args.join(" ")));
+                                if (args.filter(function (x) { return !supportedCommands.includes(x); }).length > 0) {
+                                    console.log(chalk_1.default.red("Unexpected flag(s) :", args.join(" ")));
+                                    (0, process_1.exit)(1);
+                                }
+                                else {
+                                }
+                                if (args.includes("-h") || args.includes("--help")) {
+                                    console.log("Please visit  ".concat(chalk_1.default.cyan("https://github.com/nftlabs/cli#readme"), " to know more about the usage of this package."));
+                                }
+                                if (args.includes("-v") || args.includes("--version")) {
+                                    console.log("".concat(chalk_1.default.cyan("@3rdweb/cli"), " ").concat(chalk_1.default.green(require(path_1.default.resolve(__dirname, "../package.json")).version)));
+                                }
                         }
                     }]));
                 return [2 /*return*/];

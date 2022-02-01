@@ -7,13 +7,14 @@ import fetch from "node-fetch";
 import { handler } from "./handler";
 import path from "path";
 import chalk from "chalk";
+import { exit } from "process";
 var generate = require("project-name-generator");
 const args = process.argv.slice(2);
 inquirer.registerPrompt(
   "autocomplete",
   require("inquirer-autocomplete-prompt")
 );
-
+const supportedCommands: string[] = [];
 console.clear();
 let examples: any;
 // TODO: change url to https://raw.githubusercontent.com/nftlabs/cli/main/lib/examples.json when repo is made public
@@ -94,7 +95,26 @@ fetch(
             });
           break;
         default:
-          console.log(chalk.red("Unexpected flag(s) :", args.join(" ")));
+          if (args.filter((x) => !supportedCommands.includes(x)).length > 0) {
+            console.log(chalk.red("Unexpected flag(s) :", args.join(" ")));
+            exit(1);
+          } else{
+
+          }
+          if (args.includes("-h") || args.includes("--help")) {
+            console.log(
+              `Please visit  ${chalk.cyan(
+                "https://github.com/nftlabs/cli#readme"
+              )} to know more about the usage of this package.`
+            );
+          }
+          if (args.includes("-v") || args.includes("--version")) {
+            console.log(
+              `${chalk.cyan("@3rdweb/cli")} ${chalk.green(
+                require(path.resolve(__dirname, "../package.json")).version
+              )}`
+            );
+          }
       }
     }
   );
