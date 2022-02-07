@@ -1,5 +1,5 @@
 {
-  "name": "@3rdweb/cli",
+  "name": "create-thirdweb-app",
   "version": "0.1.0",
   "description": "official thirdweb cli ",
   "main": "dist/index.js",
@@ -12,16 +12,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nftlabs/cli.git"
+    "url": "git+https://github.com/nftlabs/create-thirdweb-app.git"
   },
   "bin": {
     "create-thirdweb-app": "./bin/index.js"
   },
   "author": "thirdweb <support@thirdweb.com> (https://thirdweb.com)",
   "bugs": {
-    "url": "https://github.com/nftlabs/cli/issues"
+    "url": "https://github.com/nftlabs/create-thirdweb-app/issues"
   },
-  "homepage": "https://github.com/nftlabs/cli#readme",
+  "homepage": "https://github.com/nftlabs/create-thirdweb-app#readme",
   "dependencies": {
     "chalk": "4.1.2",
     "inquirer": "^8.2.0",
