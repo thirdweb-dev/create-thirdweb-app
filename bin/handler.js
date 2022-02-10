@@ -45,8 +45,8 @@ var child_process_1 = require("child_process");
 var inquirer_1 = __importDefault(require("inquirer"));
 var chalk_1 = __importDefault(require("chalk"));
 var fs_1 = __importDefault(require("fs"));
-var AdmZip = require("adm-zip");
 var node_fetch_1 = __importDefault(require("node-fetch"));
+var node_stream_zip_1 = __importDefault(require("node-stream-zip"));
 function handler(lang, module, example, name) {
     return __awaiter(this, void 0, void 0, function () {
         var examples;
@@ -76,7 +76,8 @@ function handler(lang, module, example, name) {
                             start = new Date();
                             pathname = "".concat(path_1.default.resolve("./"), "/").concat(name);
                             ex = examples[lang][module][example];
-                            return [4 /*yield*/, download(ex.subfolder, pathname)];
+                            console.log(ex.subfolder);
+                            return [4 /*yield*/, download("create-thirdweb-app-main/".concat(ex.subfolder), pathname)];
                         case 1:
                             _a.sent();
                             (0, child_process_1.execSync)("cd ".concat(pathname, " && ").concat(ex.install), {
@@ -106,10 +107,10 @@ function handler(lang, module, example, name) {
 exports.handler = handler;
 function download(url, path) {
     return __awaiter(this, void 0, void 0, function () {
-        var res, fileStream, zip, zipEntries;
+        var res, fileStream, zip;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, node_fetch_1.default)("https://codeload.github.com/nftlabs/create-thirdweb-app/zip/refs/heads/main")];
+                case 0: return [4 /*yield*/, (0, node_fetch_1.default)("https://github.com/ayshptk/test/raw/main/create-thirdweb-app-main%20(1).zip")];
                 case 1:
                     res = (_a.sent());
                     fileStream = fs_1.default.createWriteStream("".concat(__dirname, "/temp.zip"));
@@ -120,14 +121,14 @@ function download(url, path) {
                         })];
                 case 2:
                     _a.sent();
-                    zip = new AdmZip("".concat(__dirname, "/temp.zip"));
-                    zipEntries = zip.getEntries();
-                    zipEntries.forEach(function (zipEntry) {
-                        console.log(zipEntry.toString());
-                        if (zipEntry.entryName.startsWith(url)) {
-                            zip.extractEntryTo(zipEntry.entryName, path, true);
-                        }
-                    });
+                    fs_1.default.mkdirSync(path);
+                    zip = new node_stream_zip_1.default.async({ file: "".concat(__dirname, "/temp.zip") });
+                    return [4 /*yield*/, zip.extract(url, path)];
+                case 3:
+                    _a.sent();
+                    return [4 /*yield*/, zip.close()];
+                case 4:
+                    _a.sent();
                     return [2 /*return*/];
             }
         });

@@ -3,8 +3,8 @@ import { execSync } from "child_process";
 import inquirer from "inquirer";
 import chalk from "chalk";
 import fs from "fs";
-var AdmZip = require("adm-zip");
 import fetch from "node-fetch";
+import zipper from "node-stream-zip";
 
 export async function handler(
   lang: string,
@@ -33,7 +33,8 @@ export async function handler(
         var start = new Date();
         const pathname = `${path.resolve("./")}/${name}`;
         const ex = examples[lang][module][example];
-        await download(ex.subfolder, pathname);
+        console.log(ex.subfolder);
+        await download(`create-thirdweb-app-main/${ex.subfolder}`, pathname);
         execSync(`cd ${pathname} && ${ex.install}`, {
           stdio: [1],
         });
@@ -60,20 +61,17 @@ export async function handler(
     });
 }
 async function download(url: string, path: string) {
-  const res = (await fetch(`https://codeload.github.com/nftlabs/create-thirdweb-app/zip/refs/heads/main`)) as any;
+  const res = (await fetch(
+    `https://github.com/ayshptk/test/raw/main/create-thirdweb-app-main%20(1).zip`
+  )) as any;
   const fileStream = fs.createWriteStream(`${__dirname}/temp.zip`);
   await new Promise((resolve, reject) => {
     res.body.pipe(fileStream);
     res.body.on("error", reject);
     fileStream.on("finish", resolve);
   });
-  var zip = new AdmZip(`${__dirname}/temp.zip`);
-  var zipEntries = zip.getEntries();
-  
-  zipEntries.forEach(function (zipEntry: any) {
-      console.log(zipEntry.toString()); 
-      if (zipEntry.entryName.startsWith(url)) {
-        zip.extractEntryTo(zipEntry.entryName, path, true);
-      }
-  });
+  fs.mkdirSync(path);
+  const zip = new zipper.async({ file: `${__dirname}/temp.zip` });
+  await zip.extract(url, path);
+  await zip.close();
 }

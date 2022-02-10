@@ -4,3 +4,4 @@ bin/examples.json
 src/
 package-lock.json
 yarn.lock
+temp.zip

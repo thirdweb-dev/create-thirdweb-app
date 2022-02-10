@@ -1,7 +1,7 @@
 {
   "name": "create-thirdweb-app",
   "version": "0.1.0",
-  "description": "official thirdweb cli ",
+  "description": "create thirdweb apps on the fly ",
   "main": "dist/index.js",
   "directories": {
     "lib": "lib"
@@ -23,16 +23,17 @@
   },
   "homepage": "https://github.com/nftlabs/create-thirdweb-app#readme",
   "dependencies": {
-    "adm-zip": "^0.5.9",
     "chalk": "4.1.2",
     "inquirer": "^8.2.0",
     "inquirer-autocomplete-prompt": "^1.4.0",
     "node-fetch": "^2.6.7",
+    "node-stream-zip": "^1.15.0",
     "project-name-generator": "^2.1.9"
   },
   "devDependencies": {
     "@types/inquirer": "^8.2.0",
     "@types/node-fetch": "2",
+    "@types/unzipper": "^0.10.5",
     "typescript": "^4.4.3"
   }
 }
