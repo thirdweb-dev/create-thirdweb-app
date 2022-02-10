@@ -13,13 +13,7 @@ node -v
 Use the following command to install the package:
 
 ```
-yarn add --global @3rdweb/cli
-```
-
-or
-
-```
-npm install -g @3rdweb/cli
+npm install -g create-thirdweb-app
 ```
 
 # Usage
