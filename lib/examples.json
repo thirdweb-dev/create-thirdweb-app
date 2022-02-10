@@ -4,7 +4,7 @@
             "mint-nft": {
                 "install": "npm install",
                 "guide": "https://thirdweb.com/portal/guides/mint-nft-collection-using-typescript-sdk",
-                "start": "npm run start",
+                "start": "npm start",
                 "subfolder": "examples/node/nft/mint-nft"
             }
         }
