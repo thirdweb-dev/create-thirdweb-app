@@ -44,6 +44,9 @@ var path_1 = __importDefault(require("path"));
 var child_process_1 = require("child_process");
 var inquirer_1 = __importDefault(require("inquirer"));
 var chalk_1 = __importDefault(require("chalk"));
+var fs_1 = __importDefault(require("fs"));
+var AdmZip = require("adm-zip");
+var node_fetch_1 = __importDefault(require("node-fetch"));
 function handler(lang, module, example, name) {
     return __awaiter(this, void 0, void 0, function () {
         var examples;
@@ -65,32 +68,35 @@ function handler(lang, module, example, name) {
                 .then(function (answers) { return __awaiter(_this, void 0, void 0, function () {
                 var start, pathname, ex, startCommand;
                 return __generator(this, function (_a) {
-                    if (answers.confirm) {
-                        console.clear();
-                        console.log(chalk_1.default.gray("Setting up..."));
-                        start = new Date();
-                        pathname = "".concat(path_1.default.resolve("./"), "/").concat(name);
-                        ex = examples[lang][module][example];
-                        (0, child_process_1.execSync)("git clone ".concat(ex.repo, ".git ").concat(pathname, " "), {
-                            stdio: [1],
-                        });
-                        (0, child_process_1.execSync)("cd ".concat(pathname, " && ").concat(ex.install), {
-                            stdio: [1],
-                        });
-                        console.clear();
-                        console.log("Done in ".concat((new Date().getTime() - start.getTime()) / 1000, "s \u2728 "));
-                        startCommand = ex.start;
-                        console.log("run `" +
-                            chalk_1.default.green("cd ".concat(name).concat(startCommand ? " && " + startCommand : "")) +
-                            "` to get started");
-                        console.log("Find accompanying tutorial at ".concat(chalk_1.default.green(ex.guide)));
-                        console.log("Stuck somewhere? Join our discord at " +
-                            chalk_1.default.green("https://discord.gg/thirdweb"));
+                    switch (_a.label) {
+                        case 0:
+                            if (!answers.confirm) return [3 /*break*/, 2];
+                            console.clear();
+                            console.log(chalk_1.default.gray("Setting up..."));
+                            start = new Date();
+                            pathname = "".concat(path_1.default.resolve("./"), "/").concat(name);
+                            ex = examples[lang][module][example];
+                            return [4 /*yield*/, download(ex.subfolder, pathname)];
+                        case 1:
+                            _a.sent();
+                            (0, child_process_1.execSync)("cd ".concat(pathname, " && ").concat(ex.install), {
+                                stdio: [1],
+                            });
+                            console.clear();
+                            console.log("Done in ".concat((new Date().getTime() - start.getTime()) / 1000, "s \u2728 "));
+                            startCommand = ex.start;
+                            console.log("run `" +
+                                chalk_1.default.green("cd ".concat(name).concat(startCommand ? " && " + startCommand : "")) +
+                                "` to get started");
+                            console.log("Find accompanying tutorial at ".concat(chalk_1.default.green(ex.guide)));
+                            console.log("Stuck somewhere? Join our discord at " +
+                                chalk_1.default.green("https://discord.gg/thirdweb"));
+                            return [3 /*break*/, 3];
+                        case 2:
+                            console.log(chalk_1.default.red("Operation cancelled by user"));
+                            _a.label = 3;
+                        case 3: return [2 /*return*/];
                     }
-                    else {
-                        console.log(chalk_1.default.red("Operation cancelled by user"));
-                    }
-                    return [2 /*return*/];
                 });
             }); });
             return [2 /*return*/];
@@ -98,3 +104,32 @@ function handler(lang, module, example, name) {
     });
 }
 exports.handler = handler;
+function download(url, path) {
+    return __awaiter(this, void 0, void 0, function () {
+        var res, fileStream, zip, zipEntries;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, (0, node_fetch_1.default)("https://codeload.github.com/nftlabs/create-thirdweb-app/zip/refs/heads/main")];
+                case 1:
+                    res = (_a.sent());
+                    fileStream = fs_1.default.createWriteStream("".concat(__dirname, "/temp.zip"));
+                    return [4 /*yield*/, new Promise(function (resolve, reject) {
+                            res.body.pipe(fileStream);
+                            res.body.on("error", reject);
+                            fileStream.on("finish", resolve);
+                        })];
+                case 2:
+                    _a.sent();
+                    zip = new AdmZip("".concat(__dirname, "/temp.zip"));
+                    zipEntries = zip.getEntries();
+                    zipEntries.forEach(function (zipEntry) {
+                        console.log(zipEntry.toString());
+                        if (zipEntry.entryName.startsWith(url)) {
+                            zip.extractEntryTo(zipEntry.entryName, path, true);
+                        }
+                    });
+                    return [2 /*return*/];
+            }
+        });
+    });
+}

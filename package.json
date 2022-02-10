@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "dev": "yarn build && sudo npm i . -g",
+    "dev": "yarn build && sudo npm i . -g --force",
     "build": "tsc -p ."
   },
   "repository": {
@@ -23,10 +23,11 @@
   },
   "homepage": "https://github.com/nftlabs/create-thirdweb-app#readme",
   "dependencies": {
+    "adm-zip": "^0.5.9",
     "chalk": "4.1.2",
     "inquirer": "^8.2.0",
     "inquirer-autocomplete-prompt": "^1.4.0",
-    "node-fetch": "2",
+    "node-fetch": "^2.6.7",
     "project-name-generator": "^2.1.9"
   },
   "devDependencies": {

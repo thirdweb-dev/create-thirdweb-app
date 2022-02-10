@@ -1,3 +1,6 @@
 node_modules
 bin/examples.json
 .DS_Store
+src/
+package-lock.json
+yarn.lock

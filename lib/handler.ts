@@ -2,6 +2,9 @@ import path from "path";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
 import chalk from "chalk";
+import fs from "fs";
+var AdmZip = require("adm-zip");
+import fetch from "node-fetch";
 
 export async function handler(
   lang: string,
@@ -30,9 +33,7 @@ export async function handler(
         var start = new Date();
         const pathname = `${path.resolve("./")}/${name}`;
         const ex = examples[lang][module][example];
-        execSync(`git clone ${ex.repo}.git ${pathname} `, {
-          stdio: [1],
-        });
+        await download(ex.subfolder, pathname);
         execSync(`cd ${pathname} && ${ex.install}`, {
           stdio: [1],
         });
@@ -57,4 +58,22 @@ export async function handler(
         console.log(chalk.red("Operation cancelled by user"));
       }
     });
+}
+async function download(url: string, path: string) {
+  const res = (await fetch(`https://codeload.github.com/nftlabs/create-thirdweb-app/zip/refs/heads/main`)) as any;
+  const fileStream = fs.createWriteStream(`${__dirname}/temp.zip`);
+  await new Promise((resolve, reject) => {
+    res.body.pipe(fileStream);
+    res.body.on("error", reject);
+    fileStream.on("finish", resolve);
+  });
+  var zip = new AdmZip(`${__dirname}/temp.zip`);
+  var zipEntries = zip.getEntries();
+  
+  zipEntries.forEach(function (zipEntry: any) {
+      console.log(zipEntry.toString()); 
+      if (zipEntry.entryName.startsWith(url)) {
+        zip.extractEntryTo(zipEntry.entryName, path, true);
+      }
+  });
 }

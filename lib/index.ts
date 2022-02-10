@@ -19,7 +19,7 @@ console.clear();
 let examples: any;
 // TODO: change url to https://raw.githubusercontent.com/nftlabs/cli/main/lib/examples.json when repo is made public
 fetch(
-  "https://gist.githubusercontent.com/ayshptk/c0244844556fa43e8eacf737a678245f/raw/0caa36a56f153c0d6cdf75a15b3f28fde8d62766/create-thirdweb-app.json"
+  "https://gist.githubusercontent.com/ayshptk/c0244844556fa43e8eacf737a678245f/raw/bea72c61922bed1035e0c477c8e6eb46bf381954/create-thirdweb-app.json"
 ).then(async (res) => {
   fs.writeFile(
     path.resolve(__dirname, "examples.json"),

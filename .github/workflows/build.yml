@@ -8,12 +8,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Use Node.js 16
-        uses: actions/setup-node@v1
+      - name: Use Python
+        uses: actions/setup-python@v2
         with:
-          node-version: 16.x
-      - run: yarn install
-      - run: yarn run build
+          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+      - name: Build examples.json
+        use: python .github/build.py
+      
       - name: Commit files
         run: |
           echo ${{ github.ref }}
