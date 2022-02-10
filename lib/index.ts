@@ -17,9 +17,8 @@ inquirer.registerPrompt(
 const supportedCommands: string[] = ["-v", "--version", "-h", "--help"];
 console.clear();
 let examples: any;
-// TODO: change url to https://raw.githubusercontent.com/nftlabs/cli/main/lib/examples.json when repo is made public
 fetch(
-  "https://gist.githubusercontent.com/ayshptk/c0244844556fa43e8eacf737a678245f/raw/681932d1fd49a56c8ab57300e9f21d23154c24fe/create-thirdweb-app.json"
+  "https://raw.githubusercontent.com/nftlabs/cli/main/lib/examples.json"
 ).then(async (res) => {
   fs.writeFile(
     path.resolve(__dirname, "examples.json"),
