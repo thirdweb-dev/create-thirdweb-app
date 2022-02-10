@@ -110,7 +110,7 @@ function download(url, path) {
         var res, fileStream, zip;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, node_fetch_1.default)("https://github.com/ayshptk/test/raw/main/create-thirdweb-app-main%20(1).zip")];
+                case 0: return [4 /*yield*/, (0, node_fetch_1.default)("https://codeload.github.com/nftlabs/create-thirdweb-app/zip/refs/heads/main")];
                 case 1:
                     res = (_a.sent());
                     fileStream = fs_1.default.createWriteStream("".concat(__dirname, "/temp.zip"));

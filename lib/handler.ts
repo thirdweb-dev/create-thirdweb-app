@@ -62,7 +62,7 @@ export async function handler(
 }
 async function download(url: string, path: string) {
   const res = (await fetch(
-    `https://codeload.github.com/nftlabs/create-thirdweb-app/tar.gz/main`
+    `https://codeload.github.com/nftlabs/create-thirdweb-app/zip/refs/heads/main`
   )) as any;
   const fileStream = fs.createWriteStream(`${__dirname}/temp.zip`);
   await new Promise((resolve, reject) => {
