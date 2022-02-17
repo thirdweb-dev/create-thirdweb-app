@@ -1,0 +1,20 @@
+{
+    "nextjs": {
+        "bundle": {
+            "gather.town": {
+                "install": "npm install",
+                "guide": "",
+                "start": "npm run dev",
+                "subfolder": "examples/nextjs/bundle/gather.town"
+            }
+        },
+        "wallet-connect": {
+            "starter": {
+                "install": "npm install",
+                "guide": "",
+                "start": "npm run dev",
+                "subfolder": "examples/nextjs/wallet-connect/starter"
+            }
+        }
+    }
+}
