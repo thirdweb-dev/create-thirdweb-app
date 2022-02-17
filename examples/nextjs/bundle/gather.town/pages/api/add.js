@@ -9,10 +9,11 @@ export default async function handler(req, res) {
   const email = req.query.email;
   console.log(address, email);
   const alchemy = process.env.ALCHEMY_RPC;
+  // we are using polygon mainnet, but you can use any other RPC
   const sdk = new ThirdwebSDK(
     alchemy
       ? alchemy
-      : ethers.getDefaultProvider("https://matic-mumbai.chainstacklabs.com")
+      : ethers.getDefaultProvider("https://matic-mainnet.chainstacklabs.com")
   );
   const module = sdk.getBundleModule(process.env.BUNDLE_ADDRESS);
   const tokenId = process.env.TOKEN_ID;
