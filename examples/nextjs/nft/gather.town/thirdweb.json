@@ -1,0 +1,5 @@
+{
+  "install": "npm install",
+  "guide": "",
+  "start": "npm run dev"
+}
