@@ -1,11 +1,11 @@
 {
-    "node": {
-        "nft": {
-            "mint-nft": {
+    "nextjs": {
+        "bundle": {
+            "gather.town": {
                 "install": "npm install",
-                "guide": "https://thirdweb.com/portal/guides/mint-nft-collection-using-typescript-sdk",
-                "start": "npm start",
-                "subfolder": "examples/node/nft/mint-nft"
+                "guide": "",
+                "start": "npm run dev",
+                "subfolder": "examples/nextjs/bundle/gather.town"
             }
         }
     }
