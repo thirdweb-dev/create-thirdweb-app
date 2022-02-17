@@ -1,0 +1,1 @@
+`create-next-app` but with thirdweb wallet connect initialized.
