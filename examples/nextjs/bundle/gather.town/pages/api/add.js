@@ -21,6 +21,7 @@ export default async function handler(req, res) {
   const payload = {
     apiKey: process.env.GATHER_API_KEY,
     spaceId: process.env.GATHER_SPACE_ID,
+    //spaceId: "1W51eS9rAJ034hf/gather".replace("//", `\\`),
     guestlist: {
       [`${email}`]: {
         name: req.query.name,
@@ -28,7 +29,6 @@ export default async function handler(req, res) {
         affiliation: "Token Holder",
       },
     },
-    overwrite: false,
   };
   console.log(payload);
   if (balance.gt(0)) {
@@ -40,7 +40,14 @@ export default async function handler(req, res) {
 
       body: JSON.stringify(payload),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          console.log(res.status);
+          console.log(res.statusText);
+        }
+      })
       .then((data) => {
         if (Object.keys(data).includes(email)) {
           res.send({
