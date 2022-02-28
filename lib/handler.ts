@@ -50,7 +50,9 @@ export async function handler(
             ) +
             "` to get started"
         );
-        console.log(`Find accompanying tutorial at ${chalk.green(ex.guide)}`);
+        if(ex.guide !== undefined || ex.guide == ""){
+          console.log(`Find accompanying tutorial at ${chalk.green(ex.guide)}`);
+        }
         console.log(
           "Stuck somewhere? Join our discord at " +
             chalk.green(`https://discord.gg/thirdweb`)
