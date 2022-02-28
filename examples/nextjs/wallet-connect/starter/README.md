@@ -16,7 +16,7 @@ Once the project is set up locally, copy the `.env.example` file into `.env` and
 
 | Variable | Description | Website |
 |---|---|---|
-| MAGIC_API_KEY | Your magic.link API key | [magic.link](https://magic.link/) |
+| NEXT_PUBLIC_MAGIC_API_KEY | Your magic.link API key | [magic.link](https://magic.link/) |
 
 # Usage
 To run it locally and make changes to it run:

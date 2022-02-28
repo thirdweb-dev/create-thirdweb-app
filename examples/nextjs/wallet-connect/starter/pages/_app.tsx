@@ -17,7 +17,7 @@ const supportedChainIds = [1];
 const connectors = {
   injected: {},
   magic: {
-    apiKey: process.env.MAGIC_API_KEY as string, // Your magic api key
+    apiKey: process.env.NEXT_PUBLIC_MAGIC_API_KEY as string, // Your magic api key
     chainId: 1, // The chain ID you want to allow on magic
   },
   walletconnect: {},
