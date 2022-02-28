@@ -12,7 +12,7 @@ import {
   useToast,
   Spinner,
 } from "@chakra-ui/react";
-import { Center } from "@3rdweb/react/node_modules/@chakra-ui/layout";
+import { Center } from "@chakra-ui/react"
 import { useState } from "react";
 const Home: NextPage = () => {
   const { address, chainId, provider } = useWeb3();
