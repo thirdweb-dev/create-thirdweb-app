@@ -89,7 +89,7 @@ function handler(lang, module, example, name) {
                             console.log("run `" +
                                 chalk_1.default.green("cd ".concat(name).concat(startCommand ? " && " + startCommand : "")) +
                                 "` to get started");
-                            if (ex.guide !== undefined) {
+                            if (ex.guide !== undefined || ex.guide == "") {
                                 console.log("Find accompanying tutorial at ".concat(chalk_1.default.green(ex.guide)));
                             }
                             console.log("Stuck somewhere? Join our discord at " +
