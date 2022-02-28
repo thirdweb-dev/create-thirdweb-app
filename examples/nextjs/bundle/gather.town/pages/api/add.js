@@ -20,8 +20,7 @@ export default async function handler(req, res) {
   const balance = await module.balanceOf(address, tokenId);
   const payload = {
     apiKey: process.env.GATHER_API_KEY,
-    spaceId: process.env.GATHER_SPACE_ID,
-    //spaceId: "1W51eS9rAJ034hf/gather".replace("//", `\\`),
+    spaceId: process.env.GATHER_SPACE_ID.replace("/", `\\`),
     guestlist: {
       [`${email}`]: {
         name: req.query.name,
