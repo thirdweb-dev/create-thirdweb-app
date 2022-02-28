@@ -11,8 +11,8 @@ import {
   Input,
   useToast,
   Spinner,
+  Center
 } from "@chakra-ui/react";
-import { Center } from "@chakra-ui/react"
 import { useState } from "react";
 const Home: NextPage = () => {
   const { address, chainId, provider } = useWeb3();
