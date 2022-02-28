@@ -50,7 +50,7 @@ export async function handler(
             ) +
             "` to get started"
         );
-        if(ex.guide !== undefined){
+        if(ex.guide !== undefined || ex.guide == ""){
           console.log(`Find accompanying tutorial at ${chalk.green(ex.guide)}`);
         }
         console.log(
