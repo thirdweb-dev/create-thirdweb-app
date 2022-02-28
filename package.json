@@ -12,16 +12,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nftlabs/create-thirdweb-app.git"
+    "url": "git+https://github.com/thirdweb-dev/create-thirdweb-app.git"
   },
   "bin": {
     "create-thirdweb-app": "./bin/index.js"
   },
   "author": "thirdweb <support@thirdweb.com> (https://thirdweb.com)",
   "bugs": {
-    "url": "https://github.com/nftlabs/create-thirdweb-app/issues"
+    "url": "https://github.com/thirdweb-dev/create-thirdweb-app/issues"
   },
-  "homepage": "https://github.com/nftlabs/create-thirdweb-app#readme",
+  "homepage": "https://github.com/thirdweb-dev/create-thirdweb-app#readme",
   "dependencies": {
     "chalk": "4.1.2",
     "inquirer": "^8.2.0",
@@ -36,4 +36,4 @@
     "@types/unzipper": "^0.10.5",
     "typescript": "^4.4.3"
   }
-} 
+}

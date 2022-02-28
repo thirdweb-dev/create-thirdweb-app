@@ -50,7 +50,7 @@ export async function handler(
             ) +
             "` to get started"
         );
-        if(ex.guide !== undefined || ex.guide == ""){
+        if (ex.guide !== undefined || ex.guide == "") {
           console.log(`Find accompanying tutorial at ${chalk.green(ex.guide)}`);
         }
         console.log(
@@ -64,7 +64,7 @@ export async function handler(
 }
 async function download(url: string, path: string) {
   const res = (await fetch(
-    `https://codeload.github.com/nftlabs/create-thirdweb-app/zip/refs/heads/main`
+    `https://codeload.github.com/thirdweb-dev/create-thirdweb-app/zip/refs/heads/main`
   )) as any;
   const fileStream = fs.createWriteStream(`${__dirname}/temp.zip`);
   await new Promise((resolve, reject) => {

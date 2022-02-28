@@ -18,7 +18,7 @@ const supportedCommands: string[] = ["-v", "--version", "-h", "--help"];
 console.clear();
 let examples: any;
 fetch(
-  "https://raw.githubusercontent.com/nftlabs/cli/main/lib/examples.json"
+  "https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/lib/examples.json"
 ).then(async (res) => {
   fs.writeFile(
     path.resolve(__dirname, "examples.json"),
@@ -102,13 +102,13 @@ fetch(
           if (args.includes("-h") || args.includes("--help")) {
             console.log(
               `Please visit  ${chalk.cyan(
-                "https://github.com/nftlabs/create-thirdweb-app#readme"
+                "https://github.com/thirdweb-dev/create-thirdweb-app#readme"
               )} to know more about the usage of this package.`
             );
           }
           if (args.includes("-v") || args.includes("--version")) {
             console.log(
-              `${chalk.cyan("@3rdweb/cli")} ${chalk.green(
+              `${chalk.cyan("create-thirdweb-app")} ${chalk.green(
                 require(path.resolve(__dirname, "../package.json")).version
               )}`
             );
