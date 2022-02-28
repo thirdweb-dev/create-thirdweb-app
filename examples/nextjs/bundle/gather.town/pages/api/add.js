@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { ThirdwebSDK } from "@3rdweb/sdk";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import fetch from "node-fetch";
 export default async function handler(req, res) {
   const address = ethers.utils.verifyMessage(
@@ -9,13 +9,13 @@ export default async function handler(req, res) {
   const email = req.query.email;
   console.log(address, email);
   const alchemy = process.env.ALCHEMY_RPC;
-  // we are using polygon mainnet, but you can use any other RPC
+  // we are using polygon mumbai testnet, but you can use any other RPC
   const sdk = new ThirdwebSDK(
     alchemy
       ? alchemy
-      : ethers.getDefaultProvider("https://matic-mainnet.chainstacklabs.com")
+      : ethers.getDefaultProvider("https://matic-mumbai.chainstacklabs.com")
   );
-  const module = sdk.getBundleModule(process.env.BUNDLE_ADDRESS);
+  const module = sdk.getEdition(process.env.EDITION_ADDRESS);
   const tokenId = process.env.TOKEN_ID;
   const balance = await module.balanceOf(address, tokenId);
   const payload = {
