@@ -11,7 +11,7 @@
         "wallet-connect": {
             "starter": {
                 "install": "npm install",
-                "guide": "",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
                 "start": "npm run dev",
                 "subfolder": "examples/nextjs/wallet-connect/starter"
             }
