@@ -3,7 +3,7 @@
         "bundle": {
             "gather.town": {
                 "install": "npm install",
-                "guide": "",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/bundle/gather.town/README.md",
                 "start": "npm run dev",
                 "subfolder": "examples/nextjs/bundle/gather.town"
             }
@@ -11,7 +11,7 @@
         "wallet-connect": {
             "starter": {
                 "install": "npm install",
-                "guide": "",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
                 "start": "npm run dev",
                 "subfolder": "examples/nextjs/wallet-connect/starter"
             }
