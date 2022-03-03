@@ -1,15 +1,5 @@
 {
     "nextjs": {
-        "edition": {
-            "gather.town": {
-                "install": "npm set progress=false && npm ci",
-                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/bundle/gather.town/README.md",
-                "start": "npm run dev",
-                "subfolder": "examples/nextjs/edition/gather.town",
-                "default": false,
-                "slug": "gather"
-            }
-        },
         "react": {
             "default": {
                 "install": "yarn install",
@@ -26,6 +16,16 @@
                 "default": true,
                 "slug": "next",
                 "subfolder": "examples/nextjs/react/connect-wallet-starter"
+            }
+        },
+        "edition": {
+            "gather.town": {
+                "install": "npm set progress=false && npm ci",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/bundle/gather.town/README.md",
+                "start": "npm run dev",
+                "subfolder": "examples/nextjs/edition/gather.town",
+                "default": false,
+                "slug": "gather"
             }
         }
     }
