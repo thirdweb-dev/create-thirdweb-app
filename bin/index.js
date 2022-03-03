@@ -186,7 +186,7 @@ var examples;
                                                 case 2:
                                                     name = _a.sent();
                                                     _a.label = 3;
-                                                case 3: return [4 /*yield*/, (0, handler_1.handler)(slugMetadata.languageName, slugMetadata.moduleName, slugMetadata.exampleName, name)];
+                                                case 3: return [4 /*yield*/, (0, handler_1.handler)(slugMetadata.language, slugMetadata.module, slugMetadata.example, name)];
                                                 case 4:
                                                     _a.sent();
                                                     return [2 /*return*/];
