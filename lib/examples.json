@@ -2,23 +2,23 @@
     "nextjs": {
         "react": {
             "default": {
-                "install": "npm ci",
+                "install": "yarn install",
                 "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
-                "start": "npm run dev",
+                "start": "yarn dev",
                 "default": true,
                 "subfolder": "examples/nextjs/react/connect-wallet-starter"
             },
             "connect-wallet-starter": {
-                "install": "npm ci",
+                "install": "yarn install",
                 "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
-                "start": "npm run dev",
+                "start": "yarn dev",
                 "default": true,
                 "subfolder": "examples/nextjs/react/connect-wallet-starter"
             }
         },
         "edition": {
             "gather.town": {
-                "install": "npm ci",
+                "install": "npm set progress=false && npm ci",
                 "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/bundle/gather.town/README.md",
                 "start": "npm run dev",
                 "subfolder": "examples/nextjs/edition/gather.town",
