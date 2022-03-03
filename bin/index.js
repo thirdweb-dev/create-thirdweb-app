@@ -50,7 +50,7 @@ var process_1 = require("process");
 var generate = require("project-name-generator");
 var args = process.argv.slice(2);
 inquirer_1.default.registerPrompt("autocomplete", require("inquirer-autocomplete-prompt"));
-var supportedCommands = ["-v", "--version", "-h", "--help"];
+var supportedCommands = ["-v", "--version", "-h", "--help", "init"];
 console.clear();
 var examples;
 (0, node_fetch_1.default)("https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/lib/examples.json").then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -131,11 +131,72 @@ var examples;
                                 });
                                 break;
                             default:
+                                if (args[0] === "init") {
+                                    if (args.length === 1) {
+                                        console.log(chalk_1.default.red("Please provide the name of the template or simply run `create-thirdweb-app`"));
+                                        (0, process_1.exit)(1);
+                                    }
+                                    if (args.length > 3) {
+                                        console.log(chalk_1.default.red("`create-thirdweb-app init` takes only two arguments. Please try again."));
+                                        (0, process_1.exit)(1);
+                                    }
+                                    (0, node_fetch_1.default)("https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/lib/slugs.json")
+                                        .then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
+                                        return __generator(this, function (_a) {
+                                            switch (_a.label) {
+                                                case 0:
+                                                    if (res.status !== 200) {
+                                                        console.log(chalk_1.default.red("Error fetching slugs"));
+                                                        (0, process_1.exit)(1);
+                                                    }
+                                                    return [4 /*yield*/, res.json()];
+                                                case 1: return [2 /*return*/, _a.sent()];
+                                            }
+                                        });
+                                    }); })
+                                        .catch(function (err) {
+                                        console.log(chalk_1.default.red("Error fetching slugs:", err.message));
+                                        (0, process_1.exit)(1);
+                                    })
+                                        .then(function (slugs) { return __awaiter(void 0, void 0, void 0, function () {
+                                        var slugMetadata, name;
+                                        return __generator(this, function (_a) {
+                                            switch (_a.label) {
+                                                case 0:
+                                                    if (!slugs[args[1]]) {
+                                                        console.log(chalk_1.default.red("Invalid slug"));
+                                                        (0, process_1.exit)(1);
+                                                    }
+                                                    slugMetadata = slugs[args[1]];
+                                                    if (!(args.length === 3)) return [3 /*break*/, 1];
+                                                    name = args[2];
+                                                    return [3 /*break*/, 3];
+                                                case 1: return [4 /*yield*/, inquirer_1.default
+                                                        .prompt([
+                                                        {
+                                                            type: "input",
+                                                            name: "name",
+                                                            message: "Name of the app?",
+                                                            default: generate().dashed,
+                                                        },
+                                                    ])
+                                                        .then(function (example) {
+                                                        return example.name;
+                                                    })];
+                                                case 2:
+                                                    name = _a.sent();
+                                                    _a.label = 3;
+                                                case 3: return [4 /*yield*/, (0, handler_1.handler)(slugMetadata.languageName, slugMetadata.moduleName, slugMetadata.exampleName, name)];
+                                                case 4:
+                                                    _a.sent();
+                                                    return [2 /*return*/];
+                                            }
+                                        });
+                                    }); });
+                                }
                                 if (args.filter(function (x) { return !supportedCommands.includes(x); }).length > 0) {
                                     console.log(chalk_1.default.red("Unexpected flag(s) :", args.join(" ")));
                                     (0, process_1.exit)(1);
-                                }
-                                else {
                                 }
                                 if (args.includes("-h") || args.includes("--help")) {
                                     console.log("Please visit  ".concat(chalk_1.default.cyan("https://github.com/thirdweb-dev/create-thirdweb-app#readme"), " to know more about the usage of this package."));
