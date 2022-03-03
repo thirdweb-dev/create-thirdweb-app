@@ -149,30 +149,31 @@ fetch(
                     });
                 }
                 await handler(
-                  slugMetadata.languageName,
-                  slugMetadata.moduleName,
-                  slugMetadata.exampleName,
+                  slugMetadata.language,
+                  slugMetadata.module,
+                  slugMetadata.example,
                   name
                 );
               });
-          }
-          if (args.filter((x) => !supportedCommands.includes(x)).length > 0) {
-            console.log(chalk.red("Unexpected flag(s) :", args.join(" ")));
-            exit(1);
-          }
-          if (args.includes("-h") || args.includes("--help")) {
-            console.log(
-              `Please visit  ${chalk.cyan(
-                "https://github.com/thirdweb-dev/create-thirdweb-app#readme"
-              )} to know more about the usage of this package.`
-            );
-          }
-          if (args.includes("-v") || args.includes("--version")) {
-            console.log(
-              `${chalk.cyan("create-thirdweb-app")} ${chalk.green(
-                require(path.resolve(__dirname, "../package.json")).version
-              )}`
-            );
+          } else {
+            if (args.filter((x) => !supportedCommands.includes(x)).length > 0) {
+              console.log(chalk.red("Unexpected flag(s) :", args.join(" ")));
+              exit(1);
+            }
+            if (args.includes("-h") || args.includes("--help")) {
+              console.log(
+                `Please visit  ${chalk.cyan(
+                  "https://github.com/thirdweb-dev/create-thirdweb-app#readme"
+                )} to know more about the usage of this package.`
+              );
+            }
+            if (args.includes("-v") || args.includes("--version")) {
+              console.log(
+                `${chalk.cyan("create-thirdweb-app")} ${chalk.green(
+                  require(path.resolve(__dirname, "../package.json")).version
+                )}`
+              );
+            }
           }
       }
     }

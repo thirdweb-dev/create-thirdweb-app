@@ -5,7 +5,7 @@ examples = {}
 slugs = {}
 
 
-def add_slug(slug, metadata):
+def add_slug(slug, framework, module, app):
     if slug in slugs.keys():
         raise Exception("Duplicate slug: " + slug)
     slugs[slug] = metadata
@@ -26,6 +26,8 @@ for framework in frameworks:
                     metadata["default"] = False
                     with open("examples/" + framework + "/" + module + "/" + app + "/thirdweb.json", "w") as f:
                         f.write(json.dumps(metadata))
+                if "slug" in metadata.keys():
+                    add_slug(metadata["slug"], framework, module, app)
                 if metadata["default"]:
                     app_list["default"] = metadata
 
