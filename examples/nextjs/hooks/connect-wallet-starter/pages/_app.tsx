@@ -4,6 +4,8 @@ import type { AppProps } from "next/app";
 import { ThirdwebProvider } from "@3rdweb/react";
 import { ChakraProvider } from "@chakra-ui/react";
 
+// add or remove chainIDs you want to allow signers to be on.
+// grad the chain ID from https://chainlist.org/
 const supportedChainIds = [1];
 
 /**

@@ -83,7 +83,7 @@ const Home: NextPage = () => {
 
       <footer className={styles.footer}>
         <a
-          href="https://thirdweb.com"
+          href="https://thirdweb.com?utm_source=create-thirdweb-app&utm_medium=default-template&utm_campaign=create-thirdweb-app"
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -11,15 +11,17 @@ import {
   Input,
   useToast,
   Spinner,
-  Center
+  Center,
 } from "@chakra-ui/react";
 import { useState } from "react";
 const Home: NextPage = () => {
-  const { address, chainId, provider } = useWeb3();
+  const { address, provider } = useWeb3();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const toast = useToast();
+
+  // use regex to validate email
   const validateEmail = (email: string) => {
     return String(email)
       .toLowerCase()
@@ -27,6 +29,8 @@ const Home: NextPage = () => {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
   };
+
+  // we will send the signature to the `/api/add` endpoint to verify ownership
   async function signMessage() {
     setLoading(true);
     try {
@@ -110,6 +114,7 @@ const Home: NextPage = () => {
           Connect your wallet and sign the message to get access to gather!
         </p>
         <div>
+          {/* display form only when wallet is connected */}
           {address ? (
             <>
               <Center>
@@ -144,6 +149,7 @@ const Home: NextPage = () => {
               </Center>
             </>
           ) : (
+            // display connect wallet button when not connected
             <ConnectWallet />
           )}
         </div>
@@ -151,13 +157,18 @@ const Home: NextPage = () => {
 
       <footer className={styles.footer}>
         <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          href="https://thirdweb.com?utm_source=create-thirdweb-app&utm_medium=default-template&utm_campaign=create-thirdweb-app"
           target="_blank"
           rel="noopener noreferrer"
         >
           Powered by
           <span className={styles.logo}>
-            <Image src="/thirdweb.svg" alt="thirdweb Logo" width={29} height={18} />
+            <Image
+              src="/thirdweb.svg"
+              alt="thirdweb Logo"
+              width={29}
+              height={18}
+            />
           </span>
         </a>
       </footer>
