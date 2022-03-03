@@ -8,7 +8,11 @@ slugs = {}
 def add_slug(slug, framework, module, app):
     if slug in slugs.keys():
         raise Exception("Duplicate slug: " + slug)
-    slugs[slug] = metadata
+    slugs[slug] = {
+        "language": framework,
+        "module": module,
+        "example": app,
+    }
 
 
 for framework in frameworks:
