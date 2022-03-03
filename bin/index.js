@@ -90,13 +90,18 @@ var examples;
                                     ])
                                         .then(function (module) {
                                         moduleName_1 = module.answer;
+                                        var choices = examples[languageName_1][moduleName_1];
+                                        if ("default" in choices) {
+                                            choices.splice(choices.indexOf("default"), 1);
+                                            choices.unshift("default");
+                                        }
                                         inquirer_1.default
                                             .prompt([
                                             {
                                                 type: "list",
                                                 name: "answer",
                                                 message: "Example?",
-                                                choices: Object.keys(examples[languageName_1][moduleName_1]),
+                                                choices: choices,
                                             },
                                             {
                                                 type: "input",
