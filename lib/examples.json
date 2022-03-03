@@ -1,19 +1,19 @@
 {
     "nextjs": {
-        "hooks": {
+        "react": {
             "default": {
                 "install": "npm ci",
                 "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
                 "start": "npm run dev",
                 "default": true,
-                "subfolder": "examples/nextjs/hooks/connect-wallet-starter"
+                "subfolder": "examples/nextjs/react/connect-wallet-starter"
             },
             "connect-wallet-starter": {
                 "install": "npm ci",
                 "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
                 "start": "npm run dev",
                 "default": true,
-                "subfolder": "examples/nextjs/hooks/connect-wallet-starter"
+                "subfolder": "examples/nextjs/react/connect-wallet-starter"
             }
         },
         "edition": {
