@@ -56,7 +56,7 @@ const Home: NextPage = () => {
 
             <Button onClick={signMsg}>Sign Message</Button>
           </div>
-          <a href="https://docs.thirdweb.com" className={styles.card}>
+          <a href="typescript-sdk.thirdweb.com" className={styles.card}>
             <h2>Documentation &rarr;</h2>
             <p>Find in-depth information about thirdweb features and API.</p>
           </a>
