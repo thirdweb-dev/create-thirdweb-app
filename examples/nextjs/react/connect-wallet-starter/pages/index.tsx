@@ -10,7 +10,12 @@ import { IoLogoGithub } from "react-icons/io";
 
 const Home: NextPage = () => {
   const signer = useSigner();
-  const connectWithMetamask = useMetamask();
+  const ConnectMetamaskButtonComponent = () => {
+    const connectWithMetamask = useMetamask();
+    return (
+      <button onClick={connectWithMetamask}>Connect Metamask wallet</button>
+    );
+  };
   function sendTx() {
     signer?.sendTransaction({
       to: "0x0000000000000000000000000000000000000000",
@@ -33,7 +38,7 @@ const Home: NextPage = () => {
           <a href="https://thirdweb.com">thirdweb</a> Connect Wallet Starter
         </h1>
         <br />
-        <Button onClick={connectWithMetamask}>Connect Metamask wallet</Button>;
+        <ConnectMetamaskButtonComponent />
         <p className={styles.description}>
           This is a bare-bones NextJS app initialized by{" "}
           <a href="https://npmjs.com/package/@3rdweb/react">

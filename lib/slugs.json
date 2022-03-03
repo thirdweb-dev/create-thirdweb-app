@@ -1,1 +1,12 @@
-{}
+{
+    "gather": {
+        "language": "nextjs",
+        "module": "edition",
+        "example": "gather.town"
+    },
+    "next": {
+        "language": "nextjs",
+        "module": "react",
+        "example": "connect-wallet-starter"
+    }
+}
