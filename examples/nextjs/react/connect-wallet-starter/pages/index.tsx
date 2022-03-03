@@ -2,22 +2,23 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { ConnectWallet } from "@3rdweb/react";
-import { useWeb3 } from "@3rdweb/hooks";
+import { useMetamask, useSigner } from "@thirdweb-dev/react";
+
 import { Button } from "@chakra-ui/react";
 import { BigNumber } from "ethers";
 import { IoLogoGithub } from "react-icons/io";
 
 const Home: NextPage = () => {
-  const { provider } = useWeb3();
+  const signer = useSigner();
+  const connectWithMetamask = useMetamask();
   function sendTx() {
-    provider?.getSigner()?.sendTransaction({
+    signer?.sendTransaction({
       to: "0x0000000000000000000000000000000000000000",
       value: BigNumber.from(0),
     });
   }
   async function signMsg() {
-    await provider?.getSigner()?.signMessage("gm");
+    await signer?.signMessage("gm");
   }
   return (
     <div className={styles.container}>
@@ -32,10 +33,9 @@ const Home: NextPage = () => {
           <a href="https://thirdweb.com">thirdweb</a> Connect Wallet Starter
         </h1>
         <br />
-        <ConnectWallet />
-
+        <Button onClick={connectWithMetamask}>Connect Metamask wallet</Button>;
         <p className={styles.description}>
-          This is a barebones nextjs app initialized by{" "}
+          This is a bare-bones NextJS app initialized by{" "}
           <a href="https://npmjs.com/package/@3rdweb/react">
             thirdweb wallet connect
           </a>
@@ -43,7 +43,6 @@ const Home: NextPage = () => {
           Get started by editing{" "}
           <code className={styles.code}>pages/index.tsx</code>
         </p>
-
         <div className={styles.grid}>
           <div className={styles.card}>
             <h2>Send Transaction</h2>
