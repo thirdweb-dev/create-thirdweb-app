@@ -12,7 +12,15 @@ for framework in frameworks:
         for app in apps:
             with open("examples/" + framework + "/" + module + "/" + app + "/thirdweb.json", "r") as thirdweb:
                 metadata = json.loads(thirdweb.read())
-                metadata["subfolder"] = "examples/" + framework + "/" + module + "/" + app
+                metadata["subfolder"] = "examples/" + \
+                    framework + "/" + module + "/" + app
+                if "default" not in metadata.keys():
+                    metadata["default"] = False
+                    with open("examples/" + framework + "/" + module + "/" + app + "/thirdweb.json", "w") as f:
+                        f.write(json.dumps(metadata))
+                if metadata["default"]:
+                    app_list["default"] = metadata
+
                 app_list[app] = metadata
         module_list[module] = app_list
     examples[framework] = module_list

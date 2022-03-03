@@ -45,7 +45,7 @@ fetch(
                   {
                     type: "list",
                     name: "answer",
-                    message: "Module?",
+                    message: "Contract / Module?",
                     choices: Object.keys(examples[languageName]),
                   },
                 ])
