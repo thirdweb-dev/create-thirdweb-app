@@ -1,5 +1,5 @@
 {
-  "install": "npm install",
+  "install": "npm ci",
   "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
   "start": "npm run dev"
 }
