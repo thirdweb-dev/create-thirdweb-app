@@ -1,1 +1,7 @@
-{}
+{
+    "next": {
+        "language": "nextjs",
+        "module": "react",
+        "example": "connect-wallet-starter"
+    }
+}

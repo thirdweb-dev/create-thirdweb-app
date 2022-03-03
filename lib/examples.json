@@ -6,6 +6,7 @@
                 "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
                 "start": "yarn dev",
                 "default": true,
+                "slug": "next",
                 "subfolder": "examples/nextjs/react/connect-wallet-starter"
             },
             "connect-wallet-starter": {
@@ -13,6 +14,7 @@
                 "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
                 "start": "yarn dev",
                 "default": true,
+                "slug": "next",
                 "subfolder": "examples/nextjs/react/connect-wallet-starter"
             }
         },
