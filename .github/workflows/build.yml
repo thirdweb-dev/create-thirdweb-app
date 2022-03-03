@@ -1,8 +1,6 @@
 name: Build
 
-on:
-  push:
-    branches: [master, dev]
+on: [push]
 
 jobs:
   build:
@@ -34,11 +32,6 @@ jobs:
           git commit -m "CI: Automated build push" -a | exit 0
       - name: Push changes to master
         if: github.ref == 'refs/heads/main'
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Push changes to dev
-        if: github.ref == 'refs/heads/dev'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
