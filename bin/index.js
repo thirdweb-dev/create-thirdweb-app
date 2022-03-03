@@ -84,7 +84,7 @@ var examples;
                                         {
                                             type: "list",
                                             name: "answer",
-                                            message: "Module?",
+                                            message: "Contract / Module?",
                                             choices: Object.keys(examples[languageName_1]),
                                         },
                                     ])

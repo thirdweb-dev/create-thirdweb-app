@@ -1,19 +1,28 @@
 {
     "nextjs": {
-        "bundle": {
-            "gather.town": {
-                "install": "npm install",
-                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/bundle/gather.town/README.md",
-                "start": "npm run dev",
-                "subfolder": "examples/nextjs/bundle/gather.town"
-            }
-        },
-        "wallet-connect": {
-            "starter": {
-                "install": "npm install",
+        "hooks": {
+            "default": {
+                "install": "npm ci",
                 "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
                 "start": "npm run dev",
-                "subfolder": "examples/nextjs/wallet-connect/starter"
+                "default": true,
+                "subfolder": "examples/nextjs/hooks/connect-wallet-starter"
+            },
+            "connect-wallet-starter": {
+                "install": "npm ci",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
+                "start": "npm run dev",
+                "default": true,
+                "subfolder": "examples/nextjs/hooks/connect-wallet-starter"
+            }
+        },
+        "edition": {
+            "gather.town": {
+                "install": "npm ci",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/bundle/gather.town/README.md",
+                "start": "npm run dev",
+                "subfolder": "examples/nextjs/edition/gather.town",
+                "default": false
             }
         }
     }
