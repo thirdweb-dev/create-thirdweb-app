@@ -73,7 +73,7 @@ var examples;
                                     {
                                         type: "list",
                                         name: "answer",
-                                        message: "Language?",
+                                        message: "Language / Framework?",
                                         choices: Object.keys(examples),
                                     },
                                 ])
