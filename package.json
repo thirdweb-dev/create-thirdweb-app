@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "dev": "yarn build && sudo npm i . -g --force",
+    "dev": "yarn build && npm i . -g --force",
     "build": "tsc -p ."
   },
   "repository": {
