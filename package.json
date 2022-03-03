@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "create thirdweb apps on the fly ",
   "main": "dist/index.js",
+  "license": "MIT",
   "directories": {
     "lib": "lib"
   },
