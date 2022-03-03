@@ -51,15 +51,18 @@ fetch(
                 ])
                 .then((module) => {
                   moduleName = module.answer;
+                  let choices: string[] = examples[languageName][moduleName];
+                  if ("default" in choices) {
+                    choices.splice(choices.indexOf("default"), 1);
+                    choices.unshift("default");
+                  }
                   inquirer
                     .prompt([
                       {
                         type: "list",
                         name: "answer",
                         message: "Example?",
-                        choices: Object.keys(
-                          examples[languageName][moduleName]
-                        ),
+                        choices: choices,
                       },
                       {
                         type: "input",
