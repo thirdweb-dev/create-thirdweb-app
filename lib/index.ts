@@ -14,7 +14,7 @@ inquirer.registerPrompt(
   "autocomplete",
   require("inquirer-autocomplete-prompt")
 );
-const supportedCommands: string[] = ["-v", "--version", "-h", "--help"];
+const supportedCommands: string[] = ["-v", "--version", "-h", "--help", "init"];
 console.clear();
 let examples: any;
 fetch(
@@ -94,10 +94,71 @@ fetch(
             });
           break;
         default:
+          if (args[0] === "init") {
+            if (args.length === 1) {
+              console.log(
+                chalk.red(
+                  "Please provide the name of the template or simply run `create-thirdweb-app`"
+                )
+              );
+              exit(1);
+            }
+            if (args.length > 3) {
+              console.log(
+                chalk.red(
+                  "`create-thirdweb-app init` takes only two arguments. Please try again."
+                )
+              );
+              exit(1);
+            }
+            fetch(
+              "https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/lib/slugs.json"
+            )
+              .then(async (res) => {
+                if (res.status !== 200) {
+                  console.log(chalk.red("Error fetching slugs"));
+                  exit(1);
+                }
+                return await res.json();
+              })
+              .catch((err) => {
+                console.log(chalk.red("Error fetching slugs:", err.message));
+                exit(1);
+              })
+              .then(async (slugs) => {
+                if (!slugs[args[1]]) {
+                  console.log(chalk.red("Invalid slug"));
+                  exit(1);
+                }
+                const slugMetadata = slugs[args[1]];
+                let name: string;
+                if (args.length === 3) {
+                  name = args[2];
+                } else {
+                  name = await inquirer
+                    .prompt([
+                      {
+                        type: "input",
+                        name: "name",
+                        message: "Name of the app?",
+                        default: generate().dashed,
+                      },
+                    ])
+                    .then((example) => {
+                      return example.name;
+                    });
+                }
+                await handler(
+                  slugMetadata.languageName,
+                  slugMetadata.moduleName,
+                  slugMetadata.exampleName,
+                  name
+                );
+              });
+          }
           if (args.filter((x) => !supportedCommands.includes(x)).length > 0) {
             console.log(chalk.red("Unexpected flag(s) :", args.join(" ")));
             exit(1);
-          } else {
           }
           if (args.includes("-h") || args.includes("--help")) {
             console.log(

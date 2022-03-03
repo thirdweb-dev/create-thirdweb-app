@@ -1,8 +1,16 @@
 import os
 import json
 frameworks = os.listdir("examples")
-
 examples = {}
+slugs = {}
+
+
+def add_slug(slug, metadata):
+    if slug in slugs.keys():
+        raise Exception("Duplicate slug: " + slug)
+    slugs[slug] = metadata
+
+
 for framework in frameworks:
     module_list = {}
     modules = os.listdir("examples/" + framework)
@@ -27,3 +35,6 @@ for framework in frameworks:
 
 with open("lib/examples.json", "w") as write_file:
     json.dump(examples, write_file, indent=4)
+
+with open("lib/slugs.json", "w") as write_file:
+    json.dump(slugs, write_file, indent=4)
