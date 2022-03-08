@@ -3,5 +3,5 @@
   "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
   "start": "yarn dev",
   "default": true,
-  "slug": "next-nft"
+  "slug": "next"
 }
