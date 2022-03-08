@@ -185,7 +185,7 @@ const Home: NextPage = () => {
         <br />
         <p className={styles.description}>
           This is a barebones NextJS app initialized with{" "}
-          <a href="https://npmjs.com/package/@3rdweb/react">
+          <a href="https://npmjs.com/package/@thirdweb-dev/react">
             thirdweb react module.
           </a>{" "}
           <br />

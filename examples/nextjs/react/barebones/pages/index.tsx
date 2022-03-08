@@ -71,7 +71,7 @@ const Home: NextPage = () => {
         <br />
         <p className={styles.description}>
           This is a NextJS app initialises barebones react sdk{" "}
-          <a href="https://npmjs.com/package/@3rdweb/react">
+          <a href="https://npmjs.com/package/@thirdweb-dev/react">
             thirdweb react SDK
           </a>{" "}
           with metamask connect.
