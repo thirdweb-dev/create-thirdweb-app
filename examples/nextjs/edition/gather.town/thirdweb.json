@@ -1,8 +1,0 @@
-{
-  "install": "npm set progress=false && npm ci",
-  "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/bundle/gather.town/README.md",
-  "start": "npm run dev",
-  "subfolder": "examples/nextjs/edition/gather.town",
-  "default": false,
-  "slug": "gather"
-}
