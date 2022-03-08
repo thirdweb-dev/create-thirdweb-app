@@ -2,11 +2,21 @@
     "next": {
         "language": "nextjs",
         "module": "react",
-        "example": "connect-wallet-starter"
+        "example": "barebones"
+    },
+    "next-token": {
+        "language": "nextjs",
+        "module": "token",
+        "example": "next-starter"
     },
     "gather": {
         "language": "nextjs",
         "module": "edition",
         "example": "gather.town"
+    },
+    "next-nft": {
+        "language": "nextjs",
+        "module": "nft",
+        "example": "next-starter"
     }
 }
