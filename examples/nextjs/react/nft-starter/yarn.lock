@@ -1390,18 +1390,18 @@
   resolved "https://registry.yarnpkg.com/@thirdweb-dev/contracts/-/contracts-2.0.1.tgz#f89b8af69be4a368b33a3853fb2481d1134ee401"
   integrity sha512-3gmiNFwVyrURZcCp2gLWelkQjTSroIu9Zj3y3RHU1ZlbPC4YHy/nUsSnMmITcV2XlOl41O2hyinLX5zYpZzCWw==
 
-"@thirdweb-dev/react@^2.0.0-nightly.8":
-  version "2.0.0-nightly.8"
-  resolved "https://registry.yarnpkg.com/@thirdweb-dev/react/-/react-2.0.0-nightly.8.tgz#4319addcb371ad6e0ecfce6997b30cea459d41bb"
-  integrity sha512-XdKXXHwR5iKIAQryZyCzXC08cX/oedNSUqrHjl5EKsEBbaxvwQWhlSzMOTPK7Ms95xtBrPIZYXlgfMbAKpILPQ==
+"@thirdweb-dev/react@^2.0.0-nightly.12":
+  version "2.0.0-nightly.12"
+  resolved "https://registry.yarnpkg.com/@thirdweb-dev/react/-/react-2.0.0-nightly.12.tgz#c81c5ad54b574527d9f53f4de1d0f631b27e24af"
+  integrity sha512-u2vIBCkqpa5a4s1H6t/aTHoFJ2EKnDV9Q/ElzMLPOD3+xw5uxYeann7KElaftCOknEW39QoNOVXNh/neQYRKOQ==
   dependencies:
     tiny-invariant "^1.2.0"
     wagmi "^0.2.12"
 
-"@thirdweb-dev/sdk@^2.0.0-nightly.34":
-  version "2.0.0-nightly.34"
-  resolved "https://registry.yarnpkg.com/@thirdweb-dev/sdk/-/sdk-2.0.0-nightly.34.tgz#c02017ce1d96f19619e07b6020a35faaead4b1a2"
-  integrity sha512-WR7XawdfymkuHFLhqWvkp2ul2mrVRqSbWbqL/x/+aqw6sqCVC74jZ2FP+K3+N8w2LoXEWkh25U86gHwowhvRBQ==
+"@thirdweb-dev/sdk@^2.0.0-nightly.40":
+  version "2.0.0-nightly.40"
+  resolved "https://registry.yarnpkg.com/@thirdweb-dev/sdk/-/sdk-2.0.0-nightly.40.tgz#937f6ef5db2c7b7a0d6ae101050b1161b6b89cad"
+  integrity sha512-lZRElsz5Q9tD51rh/EgpYOEF63VC4aKmu/u4qfY4mDHH02/L4M3IP9rsEbo0dr6JV1R4wtdpn7Hk9xkCo32Bkw==
   dependencies:
     "@ethersproject/bignumber" "^5.5.0"
     "@ethersproject/bytes" "^5.4.0"
