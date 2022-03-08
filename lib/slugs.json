@@ -9,11 +9,6 @@
         "module": "token",
         "example": "next-starter"
     },
-    "gather": {
-        "language": "nextjs",
-        "module": "edition",
-        "example": "gather.town"
-    },
     "next-nft": {
         "language": "nextjs",
         "module": "nft",
