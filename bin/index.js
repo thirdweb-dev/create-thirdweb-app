@@ -49,11 +49,10 @@ var chalk_1 = __importDefault(require("chalk"));
 var process_1 = require("process");
 var generate = require("project-name-generator");
 var args = process.argv.slice(2);
-inquirer_1.default.registerPrompt("autocomplete", require("inquirer-autocomplete-prompt"));
 var supportedCommands = ["-v", "--version", "-h", "--help", "init"];
 console.clear();
 var examples;
-(0, node_fetch_1.default)("https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/lib/examples.json").then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
+(0, node_fetch_1.default)("https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/examples.json").then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, _b, _c;
     return __generator(this, function (_d) {
         switch (_d.label) {

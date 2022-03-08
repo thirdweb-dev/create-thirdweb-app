@@ -70,12 +70,11 @@ const Home: NextPage = () => {
         </h1>
         <br />
         <p className={styles.description}>
-          This is a bare-bones NextJS app initialized with{" "}
+          This is a NextJS app initialises barebones react sdk{" "}
           <a href="https://npmjs.com/package/@3rdweb/react">
-            thirdweb react module.
+            thirdweb react SDK
           </a>{" "}
-          <br />
-          It demonstrates the different functions of the NFT Contract SDK.{" "}
+          with metamask connect.
           <br />
           Get started by reading <code className={styles.code}>
             readme.md

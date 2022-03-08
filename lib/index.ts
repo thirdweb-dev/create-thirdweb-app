@@ -10,15 +10,11 @@ import chalk from "chalk";
 import { exit } from "process";
 var generate = require("project-name-generator");
 const args = process.argv.slice(2);
-inquirer.registerPrompt(
-  "autocomplete",
-  require("inquirer-autocomplete-prompt")
-);
 const supportedCommands: string[] = ["-v", "--version", "-h", "--help", "init"];
 console.clear();
 let examples: any;
 fetch(
-  "https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/lib/examples.json"
+  "https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/examples.json"
 ).then(async (res) => {
   fs.writeFile(
     path.resolve(__dirname, "examples.json"),

@@ -7,16 +7,8 @@ You can use the [create-thirdweb-app cli](https://www.npmjs.com/package/create-t
 
 And select the following options:
 1. NextJs
-2. Wallet Connect
-3. Starter
-
-
-Once the project is set up locally, copy the `.env.example` file into `.env` and add the values to it.
-
-
-| Variable | Description | Website |
-|---|---|---|
-| NEXT_PUBLIC_MAGIC_API_KEY | Your magic.link API key | [magic.link](https://magic.link/) |
+2. React
+3. Barebones
 
 # Usage
 To run it locally and make changes to it run:

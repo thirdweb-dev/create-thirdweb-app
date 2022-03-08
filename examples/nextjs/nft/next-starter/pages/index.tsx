@@ -184,7 +184,7 @@ const Home: NextPage = () => {
         </h1>
         <br />
         <p className={styles.description}>
-          This is a bare-bones NextJS app initialized with{" "}
+          This is a barebones NextJS app initialized with{" "}
           <a href="https://npmjs.com/package/@3rdweb/react">
             thirdweb react module.
           </a>{" "}
@@ -217,7 +217,7 @@ const Home: NextPage = () => {
 
                 <div className={styles.card}>
                   <h2>List All NFTs</h2>
-                  <p>Send money to an address from connected wallet. </p>
+                  <p>List all NFTs minted using the given contract </p>
                   <Button onClick={fetchAllNFTs}>List All NFTS</Button>
                   <ul>
                     {nfts.map((nft: any) => (
@@ -227,7 +227,7 @@ const Home: NextPage = () => {
                 </div>
                 <div className={styles.card}>
                   <h2>Mint NFT</h2>
-                  <p>Send money to an address from connected wallet. </p>
+                  <p>Mint new NFTs (connected wallet should have admin / minter role to do this)</p>
                   <Input id={"mintTokenName"} placeholder={"NFT Name"} />
                   <Input
                     id={"mintTokenDescription"}
@@ -249,7 +249,7 @@ const Home: NextPage = () => {
                 </div>
                 <div className={styles.card}>
                   <h2>Transfer NFT</h2>
-                  <p>Send money to an address from connected wallet. </p>
+                  <p>Transfer NFT to a different wallet. (connected wallet should hold the token ID) </p>
                   <Input
                     id={"transferTokenId"}
                     placeholder={"Transfer Token ID"}
@@ -274,7 +274,7 @@ const Home: NextPage = () => {
                 </div>
                 <div className={styles.card}>
                   <h2>Burn NFT</h2>
-                  <p>Send money to an address from connected wallet. </p>
+                  <p>Burn the NFT so its owned by no one. This is permanent. </p>
                   <Input id={"burnTokenId"} placeholder={"Burn Token ID"} />
                   <Button
                     onClick={() => {
