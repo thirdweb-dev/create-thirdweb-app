@@ -7,15 +7,33 @@
                 "start": "yarn dev",
                 "default": true,
                 "slug": "next",
-                "subfolder": "examples/nextjs/react/connect-wallet-starter"
+                "subfolder": "examples/nextjs/react/barebones"
             },
-            "connect-wallet-starter": {
+            "barebones": {
                 "install": "yarn install",
                 "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
                 "start": "yarn dev",
                 "default": true,
                 "slug": "next",
-                "subfolder": "examples/nextjs/react/connect-wallet-starter"
+                "subfolder": "examples/nextjs/react/barebones"
+            }
+        },
+        "token": {
+            "default": {
+                "install": "yarn install",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
+                "start": "yarn dev",
+                "default": true,
+                "slug": "next-token",
+                "subfolder": "examples/nextjs/token/next-starter"
+            },
+            "next-starter": {
+                "install": "yarn install",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
+                "start": "yarn dev",
+                "default": true,
+                "slug": "next-token",
+                "subfolder": "examples/nextjs/token/next-starter"
             }
         },
         "edition": {
@@ -26,6 +44,24 @@
                 "subfolder": "examples/nextjs/edition/gather.town",
                 "default": false,
                 "slug": "gather"
+            }
+        },
+        "nft": {
+            "default": {
+                "install": "yarn install",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
+                "start": "yarn dev",
+                "default": true,
+                "slug": "next-nft",
+                "subfolder": "examples/nextjs/nft/next-starter"
+            },
+            "next-starter": {
+                "install": "yarn install",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
+                "start": "yarn dev",
+                "default": true,
+                "slug": "next-nft",
+                "subfolder": "examples/nextjs/nft/next-starter"
             }
         }
     }
