@@ -52,7 +52,8 @@ fetch(
                 .then((module) => {
                   moduleName = module.answer;
                   let choices: string[] = examples[languageName][moduleName];
-                  if ("default" in choices) {
+                  choices = Object.keys(choices);
+                  if (choices.includes("default")) {
                     choices.splice(choices.indexOf("default"), 1);
                     choices.unshift("default");
                   }

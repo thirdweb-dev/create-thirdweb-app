@@ -91,7 +91,8 @@ var examples;
                                         .then(function (module) {
                                         moduleName_1 = module.answer;
                                         var choices = examples[languageName_1][moduleName_1];
-                                        if ("default" in choices) {
+                                        choices = Object.keys(choices);
+                                        if (choices.includes("default")) {
                                             choices.splice(choices.indexOf("default"), 1);
                                             choices.unshift("default");
                                         }
