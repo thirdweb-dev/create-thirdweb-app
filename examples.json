@@ -3,7 +3,7 @@
         "react": {
             "default": {
                 "install": "yarn install",
-                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/react/barebones/README.md",
                 "start": "yarn dev",
                 "default": true,
                 "slug": "next",
@@ -11,7 +11,7 @@
             },
             "barebones": {
                 "install": "yarn install",
-                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/react/barebones/README.md",
                 "start": "yarn dev",
                 "default": true,
                 "slug": "next",
@@ -21,7 +21,7 @@
         "token": {
             "default": {
                 "install": "yarn install",
-                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/token/next-starter/README.md",
                 "start": "yarn dev",
                 "default": true,
                 "slug": "next-token",
@@ -29,7 +29,7 @@
             },
             "next-starter": {
                 "install": "yarn install",
-                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/token/next-starter/README.md",
                 "start": "yarn dev",
                 "default": true,
                 "slug": "next-token",
@@ -39,7 +39,7 @@
         "nft": {
             "default": {
                 "install": "yarn install",
-                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/nft/next-starter/README.md",
                 "start": "yarn dev",
                 "default": true,
                 "slug": "next-nft",
@@ -47,7 +47,7 @@
             },
             "next-starter": {
                 "install": "yarn install",
-                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/wallet-connect/starter/README.md",
+                "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/nft/next-starter/README.md",
                 "start": "yarn dev",
                 "default": true,
                 "slug": "next-nft",
