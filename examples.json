@@ -2,9 +2,9 @@
     "nextjs": {
         "react": {
             "default": {
-                "install": "yarn install",
+                "install": "npm install",
                 "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/react/barebones/README.md",
-                "start": "yarn dev",
+                "start": "npm run dev",
                 "default": true,
                 "slug": "next",
                 "subfolder": "examples/nextjs/react/barebones"

@@ -1,7 +1,7 @@
 {
-  "install": "yarn install",
+  "install": "npm install",
   "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/nft/next-starter/README.md",
-  "start": "yarn dev",
+  "start": "npm run dev",
   "default": true,
   "slug": "next-nft"
 }

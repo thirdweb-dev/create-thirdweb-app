@@ -8,7 +8,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "dev": "yarn build && npm i . -g --force",
+    "dev": "npm run build && npm i . -g --force",
     "build": "tsc -p ."
   },
   "repository": {

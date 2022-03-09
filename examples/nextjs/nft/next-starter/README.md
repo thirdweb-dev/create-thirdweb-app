@@ -20,7 +20,7 @@ Once the project is set up locally, copy the `.env.example` file into `.env` and
 
 # Usage
 To run it locally and make changes to it run:
-```yarn dev```
+```npm run dev```
 
 
 # Contribution
