@@ -39,7 +39,7 @@ for framework in frameworks:
         module_list[module] = app_list
     examples[framework] = module_list
 
-with open("examples.json", "w") as write_file:
+with open("lib/examples.json", "w") as write_file:
     json.dump(examples, write_file, indent=4)
 
 with open("lib/slugs.json", "w") as write_file:
