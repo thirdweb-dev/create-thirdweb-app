@@ -14,7 +14,7 @@ const supportedCommands: string[] = ["-v", "--version", "-h", "--help", "init"];
 console.clear();
 let examples: any = {};
 fetch(
-  "https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/new/examples.json"
+  "https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/examples.json"
 ).then(async (res) => {
   fs.writeFile(
     path.resolve(__dirname, "examples.json"),
