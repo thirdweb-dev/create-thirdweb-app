@@ -28,11 +28,7 @@ export async function handler(lang: string, name: string) {
         const ex = examples[lang];
         console.log(chalk.gray("Setting up..."));
         console.log(chalk.gray("Cloning repo..."));
-        await download(
-          `create-thirdweb-app-main/${ex.subfolder}`,
-          pathname,
-          name
-        );
+        await download(ex.repo, pathname, name);
         console.clear();
         console.log(chalk.gray("Setting up..."));
         console.log(chalk.gray("Installing Dependencies..."));
@@ -69,7 +65,7 @@ export async function handler(lang: string, name: string) {
 }
 async function download(repo: string, path: string, name: string) {
   const res = (await fetch(
-    `https://codeload.github.com/thirdweb-dev/create-thirdweb-app/zip/refs/heads/main`
+    `https://codeload.github.com/thirdweb-dev/${repo}/zip/refs/heads/main`
   )) as any;
   const fileStream = fs.createWriteStream(`${__dirname}/${name}.zip`);
   await new Promise((resolve, reject) => {

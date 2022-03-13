@@ -77,7 +77,7 @@ function handler(lang, name) {
                             ex = examples[lang];
                             console.log(chalk_1.default.gray("Setting up..."));
                             console.log(chalk_1.default.gray("Cloning repo..."));
-                            return [4 /*yield*/, download("create-thirdweb-app-main/".concat(ex.subfolder), pathname, name)];
+                            return [4 /*yield*/, download(ex.repo, pathname, name)];
                         case 1:
                             _a.sent();
                             console.clear();
@@ -118,7 +118,7 @@ function download(repo, path, name) {
         var res, fileStream, zip;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, node_fetch_1.default)("https://codeload.github.com/thirdweb-dev/create-thirdweb-app/zip/refs/heads/main")];
+                case 0: return [4 /*yield*/, (0, node_fetch_1.default)("https://codeload.github.com/thirdweb-dev/".concat(repo, "/zip/refs/heads/main"))];
                 case 1:
                     res = (_a.sent());
                     fileStream = fs_1.default.createWriteStream("".concat(__dirname, "/").concat(name, ".zip"));
@@ -137,6 +137,7 @@ function download(repo, path, name) {
                     return [4 /*yield*/, zip.close()];
                 case 4:
                     _a.sent();
+                    fs_1.default.unlinkSync("".concat(__dirname, "/").concat(name, ".zip"));
                     return [2 /*return*/];
             }
         });
