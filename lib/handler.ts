@@ -6,35 +6,36 @@ import fs from "fs";
 import fetch from "node-fetch";
 import zipper from "node-stream-zip";
 
-export async function handler(
-  lang: string,
-  module: string,
-  example: string,
-  name: string
-) {
+export async function handler(lang: string, name: string) {
+  console.clear();
   const examples = require(path.resolve(__dirname, "examples.json"));
-
-  console.log(chalk.gray("Language: "), chalk.green(lang));
-  console.log(chalk.gray("Folder name: "), chalk.green(name));
-  console.log(chalk.gray("Example: "), chalk.green(example));
+  console.log(chalk.gray("Example: "), chalk.green(lang));
+  console.log(chalk.gray("Directory name: "), chalk.green(name));
   inquirer
     .prompt([
       {
         type: "confirm",
         name: "confirm",
-        message: "Does this look good?",
+        message: "Proceed?",
         default: true,
       },
     ])
     .then(async (answers) => {
       if (answers.confirm) {
         console.clear();
-        console.log(chalk.gray("Setting up..."));
         var start = new Date();
         const pathname = `${path.resolve("./")}/${name}`;
-        const ex = examples[lang][module][example];
-        console.log(ex.subfolder);
-        await download(`create-thirdweb-app-main/${ex.subfolder}`, pathname);
+        const ex = examples[lang];
+        console.log(chalk.gray("Setting up..."));
+        console.log(chalk.gray("Cloning repo..."));
+        await download(
+          `create-thirdweb-app-main/${ex.subfolder}`,
+          pathname,
+          name
+        );
+        console.clear();
+        console.log(chalk.gray("Setting up..."));
+        console.log(chalk.gray("Installing Dependencies..."));
         execSync(`cd ${pathname} && ${ex.install}`, {
           stdio: [1],
         });
@@ -42,7 +43,14 @@ export async function handler(
         console.log(
           `Done in ${(new Date().getTime() - start.getTime()) / 1000}s ✨ `
         );
-        const startCommand = ex.start;
+        const startCommand = ex.run;
+
+        if (ex.guide !== undefined || ex.guide !== "") {
+          console.log(`Find accompanying tutorial at ${chalk.green(ex.guide)}`);
+        }
+        if (ex.docs !== undefined || ex.docs !== "") {
+          console.log(`Check out docs at ${chalk.green(ex.docs)}`);
+        }
         console.log(
           "run `" +
             chalk.green(
@@ -50,9 +58,6 @@ export async function handler(
             ) +
             "` to get started"
         );
-        if (ex.guide !== undefined || ex.guide == "") {
-          console.log(`Find accompanying tutorial at ${chalk.green(ex.guide)}`);
-        }
         console.log(
           "Stuck somewhere? Join our discord at " +
             chalk.green(`https://discord.gg/thirdweb`)
@@ -62,18 +67,19 @@ export async function handler(
       }
     });
 }
-async function download(url: string, path: string) {
+async function download(repo: string, path: string, name: string) {
   const res = (await fetch(
     `https://codeload.github.com/thirdweb-dev/create-thirdweb-app/zip/refs/heads/main`
   )) as any;
-  const fileStream = fs.createWriteStream(`${__dirname}/temp.zip`);
+  const fileStream = fs.createWriteStream(`${__dirname}/${name}.zip`);
   await new Promise((resolve, reject) => {
     res.body.pipe(fileStream);
     res.body.on("error", reject);
     fileStream.on("finish", resolve);
   });
   fs.mkdirSync(path);
-  const zip = new zipper.async({ file: `${__dirname}/temp.zip` });
-  await zip.extract(url, path);
+  const zip = new zipper.async({ file: `${__dirname}/${name}.zip` });
+  await zip.extract(null, path);
   await zip.close();
+  fs.unlinkSync(`${__dirname}/${name}.zip`);
 }
