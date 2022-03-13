@@ -12,170 +12,111 @@ var generate = require("project-name-generator");
 const args = process.argv.slice(2);
 const supportedCommands: string[] = ["-v", "--version", "-h", "--help", "init"];
 console.clear();
-let examples: any;
+let examples: any = {};
 fetch(
-  "https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/lib/examples.json"
+  "https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/new/examples.json"
 ).then(async (res) => {
   fs.writeFile(
     path.resolve(__dirname, "examples.json"),
     await res.text(),
-    (err) => {
+    async (err) => {
       examples = require(path.resolve(__dirname, "examples.json"));
       switch (args.length) {
         case 0:
           let languageName: string;
-          let moduleName: string;
           inquirer
             .prompt([
               {
                 type: "list",
-                name: "answer",
-                message: "Language / Framework?",
+                name: "language",
+                message: "Choose example",
                 choices: Object.keys(examples),
               },
             ])
-            .then((language) => {
-              languageName = language.answer;
-              inquirer
-                .prompt([
-                  {
-                    type: "list",
-                    name: "answer",
-                    message: "Contract / Module?",
-                    choices: Object.keys(examples[languageName]),
-                  },
-                ])
-                .then((module) => {
-                  moduleName = module.answer;
-                  let choices: string[] = examples[languageName][moduleName];
-                  choices = Object.keys(choices);
-                  if (choices.includes("default")) {
-                    choices.splice(choices.indexOf("default"), 1);
-                    choices.unshift("default");
+            .then((answer) => {
+              languageName = answer.language;
+              chooseName()
+                .then(async (answer) => {
+                  await handler(languageName, answer);
+                })
+                .catch((err) => {
+                  console.clear();
+                  if (err.command) {
+                    console.log(`${chalk.cyan(err.command)} has failed.`);
+                  } else {
+                    console.log(
+                      chalk.red("Unexpected error. Please report it as a bug:")
+                    );
+                    console.log(err);
                   }
-                  inquirer
-                    .prompt([
-                      {
-                        type: "list",
-                        name: "answer",
-                        message: "Example?",
-                        choices: choices,
-                      },
-                      {
-                        type: "input",
-                        name: "name",
-                        message: "Name of the app?",
-                        default: generate().dashed,
-                      },
-                    ])
-                    .then(async (example) => {
-                      console.clear();
-                      await handler(
-                        languageName,
-                        moduleName,
-                        example.answer,
-                        example.name
-                      );
-                    })
-                    .catch((err) => {
-                      console.clear();
-                      if (err.command) {
-                        console.log(`  ${chalk.cyan(err.command)} has failed.`);
-                      } else {
-                        console.log(
-                          chalk.red(
-                            "Unexpected error. Please report it as a bug:"
-                          )
-                        );
-                        console.log(err);
-                      }
-                    });
                 });
             });
           break;
-        default:
-          if (args[0] === "init") {
-            if (args.length === 1) {
-              console.log(
-                chalk.red(
-                  "Please provide the name of the template or simply run `create-thirdweb-app`"
-                )
-              );
-              exit(1);
-            }
-            if (args.length > 3) {
-              console.log(
-                chalk.red(
-                  "`create-thirdweb-app init` takes only two arguments. Please try again."
-                )
-              );
-              exit(1);
-            }
-            fetch(
-              "https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/lib/slugs.json"
-            )
-              .then(async (res) => {
-                if (res.status !== 200) {
-                  console.log(chalk.red("Error fetching slugs"));
-                  exit(1);
-                }
-                return await res.json();
-              })
-              .catch((err) => {
-                console.log(chalk.red("Error fetching slugs:", err.message));
-                exit(1);
-              })
-              .then(async (slugs) => {
-                if (!slugs[args[1]]) {
-                  console.log(chalk.red("Invalid slug"));
-                  exit(1);
-                }
-                const slugMetadata = slugs[args[1]];
-                let name: string;
-                if (args.length === 3) {
-                  name = args[2];
-                } else {
-                  name = await inquirer
-                    .prompt([
-                      {
-                        type: "input",
-                        name: "name",
-                        message: "Name of the app?",
-                        default: generate().dashed,
-                      },
-                    ])
-                    .then((example) => {
-                      return example.name;
-                    });
-                }
-                await handler(
-                  slugMetadata.language,
-                  slugMetadata.module,
-                  slugMetadata.example,
-                  name
-                );
-              });
+        case 1:
+          if (Object.keys(examples).includes(args[0])) {
+            let name: string;
+
+            chooseName().then(async (answer) => {
+              await handler(args[0], answer);
+            });
           } else {
-            if (args.filter((x) => !supportedCommands.includes(x)).length > 0) {
-              console.log(chalk.red("Unexpected flag(s) :", args.join(" ")));
-              exit(1);
-            }
-            if (args.includes("-h") || args.includes("--help")) {
-              console.log(
-                `Please visit  ${chalk.cyan(
-                  "https://github.com/thirdweb-dev/create-thirdweb-app#readme"
-                )} to know more about the usage of this package.`
-              );
-            }
-            if (args.includes("-v") || args.includes("--version")) {
-              console.log(
-                `${chalk.cyan("create-thirdweb-app")} ${chalk.green(
-                  require(path.resolve(__dirname, "../package.json")).version
-                )}`
-              );
-            }
+            flags(args[0]);
+          }
+          break;
+        case 2:
+          if (Object.keys(examples).includes(args[0])) {
+            await handler(args[0], args[1]);
+          } else {
+            flags(args[0]);
+          }
+          break;
+        default:
+          if (args.filter((x) => !supportedCommands.includes(x)).length > 0) {
+            console.log(chalk.red("Unexpected flag(s) :", args.join(" ")));
+            exit(1);
+          }
+
+          if (args.includes("-v") || args.includes("--version")) {
           }
       }
     }
   );
 });
+
+function flags(flag: string) {
+  switch (flag) {
+    case "-h" || "--help":
+      console.log(
+        `Please visit  ${chalk.cyan(
+          "https://github.com/thirdweb-dev/create-thirdweb-app#readme"
+        )} to know more about the usage of this package.`
+      );
+      break;
+
+    case "-v" || "--version":
+      console.log(
+        `${chalk.cyan("create-thirdweb-app")} ${chalk.green(
+          require(path.resolve(__dirname, "../package.json")).version
+        )}`
+      );
+      break;
+    default:
+      console.log(chalk.red("Unexpected flag:", flag));
+      exit(1);
+  }
+}
+
+async function chooseName() {
+  return await inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "Name of the app?",
+        default: generate().dashed,
+      },
+    ])
+    .then((answer) => {
+      return answer.name;
+    });
+}

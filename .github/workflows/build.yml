@@ -1,6 +1,8 @@
 name: Build
 
-on: [push]
+on:
+  push:
+    branches: [main]
 
 jobs:
   build:
@@ -8,20 +10,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Use Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.x" # Version range or exact version of a Python version to use, using SemVer's version range syntax
-          architecture: "x64" # optional x64 or x86. Defaults to x64 if not specified
 
       - name: Install Dependencies
         run: npm install
 
       - name: Build
         run: npm run build
-
-      - name: Build examples.json
-        run: python .github/build.py
 
       - name: Commit files
         run: |
@@ -30,6 +24,7 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git commit -m "CI: Automated build push" -a | exit 0
+
       - name: Push changes to master
         if: github.ref == 'refs/heads/main'
         uses: ad-m/github-push-action@master

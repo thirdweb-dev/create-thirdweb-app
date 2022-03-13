@@ -47,21 +47,21 @@ var chalk_1 = __importDefault(require("chalk"));
 var fs_1 = __importDefault(require("fs"));
 var node_fetch_1 = __importDefault(require("node-fetch"));
 var node_stream_zip_1 = __importDefault(require("node-stream-zip"));
-function handler(lang, module, example, name) {
+function handler(lang, name) {
     return __awaiter(this, void 0, void 0, function () {
         var examples;
         var _this = this;
         return __generator(this, function (_a) {
+            console.clear();
             examples = require(path_1.default.resolve(__dirname, "examples.json"));
-            console.log(chalk_1.default.gray("Language: "), chalk_1.default.green(lang));
-            console.log(chalk_1.default.gray("Folder name: "), chalk_1.default.green(name));
-            console.log(chalk_1.default.gray("Example: "), chalk_1.default.green(example));
+            console.log(chalk_1.default.gray("Example: "), chalk_1.default.green(lang));
+            console.log(chalk_1.default.gray("Directory name: "), chalk_1.default.green(name));
             inquirer_1.default
                 .prompt([
                 {
                     type: "confirm",
                     name: "confirm",
-                    message: "Does this look good?",
+                    message: "Proceed?",
                     default: true,
                 },
             ])
@@ -72,26 +72,32 @@ function handler(lang, module, example, name) {
                         case 0:
                             if (!answers.confirm) return [3 /*break*/, 2];
                             console.clear();
-                            console.log(chalk_1.default.gray("Setting up..."));
                             start = new Date();
                             pathname = "".concat(path_1.default.resolve("./"), "/").concat(name);
-                            ex = examples[lang][module][example];
-                            console.log(ex.subfolder);
-                            return [4 /*yield*/, download("create-thirdweb-app-main/".concat(ex.subfolder), pathname)];
+                            ex = examples[lang];
+                            console.log(chalk_1.default.gray("Setting up..."));
+                            console.log(chalk_1.default.gray("Cloning repo..."));
+                            return [4 /*yield*/, download(ex.repo, pathname, name)];
                         case 1:
                             _a.sent();
+                            console.clear();
+                            console.log(chalk_1.default.gray("Setting up..."));
+                            console.log(chalk_1.default.gray("Installing Dependencies..."));
                             (0, child_process_1.execSync)("cd ".concat(pathname, " && ").concat(ex.install), {
                                 stdio: [1],
                             });
                             console.clear();
                             console.log("Done in ".concat((new Date().getTime() - start.getTime()) / 1000, "s \u2728 "));
-                            startCommand = ex.start;
+                            startCommand = ex.run;
+                            if (ex.guide !== undefined || ex.guide !== "") {
+                                console.log("Find accompanying tutorial at ".concat(chalk_1.default.green(ex.guide)));
+                            }
+                            if (ex.docs !== undefined || ex.docs !== "") {
+                                console.log("Check out docs at ".concat(chalk_1.default.green(ex.docs)));
+                            }
                             console.log("run `" +
                                 chalk_1.default.green("cd ".concat(name).concat(startCommand ? " && " + startCommand : "")) +
                                 "` to get started");
-                            if (ex.guide !== undefined || ex.guide == "") {
-                                console.log("Find accompanying tutorial at ".concat(chalk_1.default.green(ex.guide)));
-                            }
                             console.log("Stuck somewhere? Join our discord at " +
                                 chalk_1.default.green("https://discord.gg/thirdweb"));
                             return [3 /*break*/, 3];
@@ -107,15 +113,15 @@ function handler(lang, module, example, name) {
     });
 }
 exports.handler = handler;
-function download(url, path) {
+function download(repo, path, name) {
     return __awaiter(this, void 0, void 0, function () {
         var res, fileStream, zip;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, node_fetch_1.default)("https://codeload.github.com/thirdweb-dev/create-thirdweb-app/zip/refs/heads/main")];
+                case 0: return [4 /*yield*/, (0, node_fetch_1.default)("https://codeload.github.com/thirdweb-dev/".concat(repo, "/zip/refs/heads/main"))];
                 case 1:
                     res = (_a.sent());
-                    fileStream = fs_1.default.createWriteStream("".concat(__dirname, "/temp.zip"));
+                    fileStream = fs_1.default.createWriteStream("".concat(__dirname, "/").concat(name, ".zip"));
                     return [4 /*yield*/, new Promise(function (resolve, reject) {
                             res.body.pipe(fileStream);
                             res.body.on("error", reject);
@@ -124,13 +130,14 @@ function download(url, path) {
                 case 2:
                     _a.sent();
                     fs_1.default.mkdirSync(path);
-                    zip = new node_stream_zip_1.default.async({ file: "".concat(__dirname, "/temp.zip") });
-                    return [4 /*yield*/, zip.extract(url, path)];
+                    zip = new node_stream_zip_1.default.async({ file: "".concat(__dirname, "/").concat(name, ".zip") });
+                    return [4 /*yield*/, zip.extract(null, path)];
                 case 3:
                     _a.sent();
                     return [4 /*yield*/, zip.close()];
                 case 4:
                     _a.sent();
+                    fs_1.default.unlinkSync("".concat(__dirname, "/").concat(name, ".zip"));
                     return [2 /*return*/];
             }
         });

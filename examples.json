@@ -1,0 +1,9 @@
+{
+  "next": {
+    "repo": "create-thirdweb-app",
+    "guide": "https://thirdweb.com",
+    "docs": "https://google.com",
+    "install": "echo hello",
+    "run": "echo hi"
+  }
+}

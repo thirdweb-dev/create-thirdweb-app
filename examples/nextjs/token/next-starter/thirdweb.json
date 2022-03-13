@@ -1,7 +1,0 @@
-{
-  "install": "npm install",
-  "guide": "https://github.com/thirdweb-dev/create-thirdweb-app/blob/main/examples/nextjs/token/next-starter/README.md",
-  "start": "npm run dev",
-  "default": true,
-  "slug": "next-token"
-}

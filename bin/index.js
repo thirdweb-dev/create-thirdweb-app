@@ -51,8 +51,8 @@ var generate = require("project-name-generator");
 var args = process.argv.slice(2);
 var supportedCommands = ["-v", "--version", "-h", "--help", "init"];
 console.clear();
-var examples;
-(0, node_fetch_1.default)("https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/lib/examples.json").then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
+var examples = {};
+(0, node_fetch_1.default)("https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/new/examples.json").then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, _b, _c;
     return __generator(this, function (_d) {
         switch (_d.label) {
@@ -61,61 +61,36 @@ var examples;
                 _c = [path_1.default.resolve(__dirname, "examples.json")];
                 return [4 /*yield*/, res.text()];
             case 1:
-                _b.apply(_a, _c.concat([_d.sent(), function (err) {
-                        examples = require(path_1.default.resolve(__dirname, "examples.json"));
-                        switch (args.length) {
-                            case 0:
-                                var languageName_1;
-                                var moduleName_1;
-                                inquirer_1.default
-                                    .prompt([
-                                    {
-                                        type: "list",
-                                        name: "answer",
-                                        message: "Language / Framework?",
-                                        choices: Object.keys(examples),
-                                    },
-                                ])
-                                    .then(function (language) {
-                                    languageName_1 = language.answer;
+                _b.apply(_a, _c.concat([_d.sent(), function (err) { return __awaiter(void 0, void 0, void 0, function () {
+                        var _a, languageName_1, name_1;
+                        return __generator(this, function (_b) {
+                            switch (_b.label) {
+                                case 0:
+                                    examples = require(path_1.default.resolve(__dirname, "examples.json"));
+                                    _a = args.length;
+                                    switch (_a) {
+                                        case 0: return [3 /*break*/, 1];
+                                        case 1: return [3 /*break*/, 2];
+                                        case 2: return [3 /*break*/, 3];
+                                    }
+                                    return [3 /*break*/, 7];
+                                case 1:
                                     inquirer_1.default
                                         .prompt([
                                         {
                                             type: "list",
-                                            name: "answer",
-                                            message: "Contract / Module?",
-                                            choices: Object.keys(examples[languageName_1]),
+                                            name: "language",
+                                            message: "Choose example",
+                                            choices: Object.keys(examples),
                                         },
                                     ])
-                                        .then(function (module) {
-                                        moduleName_1 = module.answer;
-                                        var choices = examples[languageName_1][moduleName_1];
-                                        choices = Object.keys(choices);
-                                        if (choices.includes("default")) {
-                                            choices.splice(choices.indexOf("default"), 1);
-                                            choices.unshift("default");
-                                        }
-                                        inquirer_1.default
-                                            .prompt([
-                                            {
-                                                type: "list",
-                                                name: "answer",
-                                                message: "Example?",
-                                                choices: choices,
-                                            },
-                                            {
-                                                type: "input",
-                                                name: "name",
-                                                message: "Name of the app?",
-                                                default: generate().dashed,
-                                            },
-                                        ])
-                                            .then(function (example) { return __awaiter(void 0, void 0, void 0, function () {
+                                        .then(function (answer) {
+                                        languageName_1 = answer.language;
+                                        chooseName()
+                                            .then(function (answer) { return __awaiter(void 0, void 0, void 0, function () {
                                             return __generator(this, function (_a) {
                                                 switch (_a.label) {
-                                                    case 0:
-                                                        console.clear();
-                                                        return [4 /*yield*/, (0, handler_1.handler)(languageName_1, moduleName_1, example.answer, example.name)];
+                                                    case 0: return [4 /*yield*/, (0, handler_1.handler)(languageName_1, answer)];
                                                     case 1:
                                                         _a.sent();
                                                         return [2 /*return*/];
@@ -125,7 +100,7 @@ var examples;
                                             .catch(function (err) {
                                             console.clear();
                                             if (err.command) {
-                                                console.log("  ".concat(chalk_1.default.cyan(err.command), " has failed."));
+                                                console.log("".concat(chalk_1.default.cyan(err.command), " has failed."));
                                             }
                                             else {
                                                 console.log(chalk_1.default.red("Unexpected error. Please report it as a bug:"));
@@ -133,87 +108,81 @@ var examples;
                                             }
                                         });
                                     });
-                                });
-                                break;
-                            default:
-                                if (args[0] === "init") {
-                                    if (args.length === 1) {
-                                        console.log(chalk_1.default.red("Please provide the name of the template or simply run `create-thirdweb-app`"));
-                                        (0, process_1.exit)(1);
+                                    return [3 /*break*/, 8];
+                                case 2:
+                                    if (Object.keys(examples).includes(args[0])) {
+                                        chooseName().then(function (answer) { return __awaiter(void 0, void 0, void 0, function () {
+                                            return __generator(this, function (_a) {
+                                                switch (_a.label) {
+                                                    case 0: return [4 /*yield*/, (0, handler_1.handler)(args[0], answer)];
+                                                    case 1:
+                                                        _a.sent();
+                                                        return [2 /*return*/];
+                                                }
+                                            });
+                                        }); });
                                     }
-                                    if (args.length > 3) {
-                                        console.log(chalk_1.default.red("`create-thirdweb-app init` takes only two arguments. Please try again."));
-                                        (0, process_1.exit)(1);
+                                    else {
+                                        flags(args[0]);
                                     }
-                                    (0, node_fetch_1.default)("https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/lib/slugs.json")
-                                        .then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
-                                        return __generator(this, function (_a) {
-                                            switch (_a.label) {
-                                                case 0:
-                                                    if (res.status !== 200) {
-                                                        console.log(chalk_1.default.red("Error fetching slugs"));
-                                                        (0, process_1.exit)(1);
-                                                    }
-                                                    return [4 /*yield*/, res.json()];
-                                                case 1: return [2 /*return*/, _a.sent()];
-                                            }
-                                        });
-                                    }); })
-                                        .catch(function (err) {
-                                        console.log(chalk_1.default.red("Error fetching slugs:", err.message));
-                                        (0, process_1.exit)(1);
-                                    })
-                                        .then(function (slugs) { return __awaiter(void 0, void 0, void 0, function () {
-                                        var slugMetadata, name;
-                                        return __generator(this, function (_a) {
-                                            switch (_a.label) {
-                                                case 0:
-                                                    if (!slugs[args[1]]) {
-                                                        console.log(chalk_1.default.red("Invalid slug"));
-                                                        (0, process_1.exit)(1);
-                                                    }
-                                                    slugMetadata = slugs[args[1]];
-                                                    if (!(args.length === 3)) return [3 /*break*/, 1];
-                                                    name = args[2];
-                                                    return [3 /*break*/, 3];
-                                                case 1: return [4 /*yield*/, inquirer_1.default
-                                                        .prompt([
-                                                        {
-                                                            type: "input",
-                                                            name: "name",
-                                                            message: "Name of the app?",
-                                                            default: generate().dashed,
-                                                        },
-                                                    ])
-                                                        .then(function (example) {
-                                                        return example.name;
-                                                    })];
-                                                case 2:
-                                                    name = _a.sent();
-                                                    _a.label = 3;
-                                                case 3: return [4 /*yield*/, (0, handler_1.handler)(slugMetadata.language, slugMetadata.module, slugMetadata.example, name)];
-                                                case 4:
-                                                    _a.sent();
-                                                    return [2 /*return*/];
-                                            }
-                                        });
-                                    }); });
-                                }
-                                else {
+                                    return [3 /*break*/, 8];
+                                case 3:
+                                    if (!Object.keys(examples).includes(args[0])) return [3 /*break*/, 5];
+                                    return [4 /*yield*/, (0, handler_1.handler)(args[0], args[1])];
+                                case 4:
+                                    _b.sent();
+                                    return [3 /*break*/, 6];
+                                case 5:
+                                    flags(args[0]);
+                                    _b.label = 6;
+                                case 6: return [3 /*break*/, 8];
+                                case 7:
                                     if (args.filter(function (x) { return !supportedCommands.includes(x); }).length > 0) {
                                         console.log(chalk_1.default.red("Unexpected flag(s) :", args.join(" ")));
                                         (0, process_1.exit)(1);
                                     }
-                                    if (args.includes("-h") || args.includes("--help")) {
-                                        console.log("Please visit  ".concat(chalk_1.default.cyan("https://github.com/thirdweb-dev/create-thirdweb-app#readme"), " to know more about the usage of this package."));
-                                    }
                                     if (args.includes("-v") || args.includes("--version")) {
-                                        console.log("".concat(chalk_1.default.cyan("create-thirdweb-app"), " ").concat(chalk_1.default.green(require(path_1.default.resolve(__dirname, "../package.json")).version)));
                                     }
-                                }
-                        }
-                    }]));
+                                    _b.label = 8;
+                                case 8: return [2 /*return*/];
+                            }
+                        });
+                    }); }]));
                 return [2 /*return*/];
         }
     });
 }); });
+function flags(flag) {
+    switch (flag) {
+        case "-h" || "--help":
+            console.log("Please visit  ".concat(chalk_1.default.cyan("https://github.com/thirdweb-dev/create-thirdweb-app#readme"), " to know more about the usage of this package."));
+            break;
+        case "-v" || "--version":
+            console.log("".concat(chalk_1.default.cyan("create-thirdweb-app"), " ").concat(chalk_1.default.green(require(path_1.default.resolve(__dirname, "../package.json")).version)));
+            break;
+        default:
+            console.log(chalk_1.default.red("Unexpected flag:", flag));
+            (0, process_1.exit)(1);
+    }
+}
+function chooseName() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, inquirer_1.default
+                        .prompt([
+                        {
+                            type: "input",
+                            name: "name",
+                            message: "Name of the app?",
+                            default: generate().dashed,
+                        },
+                    ])
+                        .then(function (answer) {
+                        return answer.name;
+                    })];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
