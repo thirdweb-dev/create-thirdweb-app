@@ -131,7 +131,7 @@ function download(repo, path, name) {
                     _a.sent();
                     fs_1.default.mkdirSync(path);
                     zip = new node_stream_zip_1.default.async({ file: "".concat(__dirname, "/").concat(name, ".zip") });
-                    return [4 /*yield*/, zip.extract(null, path)];
+                    return [4 /*yield*/, zip.extract("".concat(repo, "-main"), path)];
                 case 3:
                     _a.sent();
                     return [4 /*yield*/, zip.close()];

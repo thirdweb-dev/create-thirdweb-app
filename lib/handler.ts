@@ -75,7 +75,7 @@ async function download(repo: string, path: string, name: string) {
   });
   fs.mkdirSync(path);
   const zip = new zipper.async({ file: `${__dirname}/${name}.zip` });
-  await zip.extract(null, path);
+  await zip.extract(`${repo}-main`, path);
   await zip.close();
   fs.unlinkSync(`${__dirname}/${name}.zip`);
 }
