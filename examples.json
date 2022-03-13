@@ -1,6 +1,6 @@
 {
   "next": {
-    "repo": "https://github.com/thirdweb-dev/sdk-next-starter",
+    "repo": "sdk-next-starter",
     "guide": "",
     "docs": "https://github.com/thirdweb-dev/react/blob/main/README.md",
     "install": "npm install",
