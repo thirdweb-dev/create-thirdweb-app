@@ -10,7 +10,7 @@ import chalk from "chalk";
 import { exit } from "process";
 var generate = require("project-name-generator");
 const args = process.argv.slice(2);
-const supportedCommands: string[] = ["-v", "--version", "-h", "--help", "init"];
+const supportedCommands: string[] = ["-v", "--version", "-h", "--help"];
 console.clear();
 let examples: any = {};
 fetch(
@@ -89,7 +89,7 @@ function flags(flag: string) {
       console.log(
         `Please visit  ${chalk.cyan(
           "https://github.com/thirdweb-dev/create-thirdweb-app#readme"
-        )} to know more about the usage of this package.`
+        )} to know more about the usage of this CLI.`
       );
       break;
 
