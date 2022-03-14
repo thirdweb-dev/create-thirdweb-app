@@ -1,9 +1,16 @@
 {
-  "next": {
+  "NextJS": {
     "repo": "sdk-next-starter",
     "guide": "",
     "docs": "https://github.com/thirdweb-dev/react/blob/main/README.md",
     "install": "npm install",
     "run": "npm run dev"
-  }
+  },
+  "Node" : {
+    "repo" : "sdk-node-starter",
+    "guide" : "",
+    "docs" : "",
+    "install" : "npm install",
+    "run" : "npm run start"
+  } 
 }
