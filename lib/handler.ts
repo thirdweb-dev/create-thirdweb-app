@@ -61,6 +61,15 @@ export async function handler(lang: string, name: string) {
       } else {
         console.log(chalk.red("Operation cancelled by user"));
       }
+    })
+    .catch((err) => {
+      console.clear();
+      if (err.command) {
+        console.log(`${chalk.cyan(err.command)} has failed.`);
+      } else {
+        console.log(chalk.red("Unexpected error. Please report it as a bug:"));
+        console.log(err.message);
+      }
     });
 }
 async function download(repo: string, path: string, name: string) {

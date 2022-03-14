@@ -15,73 +15,98 @@ console.clear();
 let examples: any = {};
 fetch(
   "https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/examples.json"
-).then(async (res) => {
-  fs.writeFile(
-    path.resolve(__dirname, "examples.json"),
-    await res.text(),
-    async (err) => {
-      examples = require(path.resolve(__dirname, "examples.json"));
-      switch (args.length) {
-        case 0:
-          let languageName: string;
-          inquirer
-            .prompt([
-              {
-                type: "list",
-                name: "language",
-                message: "Choose example",
-                choices: Object.keys(examples),
-              },
-            ])
-            .then((answer) => {
-              languageName = answer.language;
+)
+  .then(async (res) => {
+    fs.writeFile(
+      path.resolve(__dirname, "examples.json"),
+      await res.text(),
+      async (err) => {
+        examples = require(path.resolve(__dirname, "examples.json"));
+        switch (args.length) {
+          case 0:
+            let languageName: string;
+            inquirer
+              .prompt([
+                {
+                  type: "list",
+                  name: "language",
+                  message: "Choose example",
+                  choices: Object.keys(examples),
+                },
+              ])
+              .then((answer) => {
+                languageName = answer.language;
+                chooseName()
+                  .then(async (answer) => {
+                    await handler(languageName, answer);
+                  })
+                  .catch((err) => {
+                    console.clear();
+                    if (err.command) {
+                      console.log(`${chalk.cyan(err.command)} has failed.`);
+                    } else {
+                      console.log(
+                        chalk.red(
+                          "Unexpected error. Please report it as a bug:"
+                        )
+                      );
+                      console.log(err.message);
+                    }
+                  });
+              })
+              .catch((err) => {
+                console.clear();
+                console.log(
+                  chalk.red("Unexpected error. Please report it as a bug:")
+                );
+                console.log(err.message);
+              });
+            break;
+          case 1:
+            if (Object.keys(examples).includes(args[0])) {
+              let name: string;
+
               chooseName()
                 .then(async (answer) => {
-                  await handler(languageName, answer);
+                  await handler(args[0], answer);
                 })
                 .catch((err) => {
                   console.clear();
                   if (err.command) {
                     console.log(`${chalk.cyan(err.command)} has failed.`);
-                  } else {
-                    console.log(
-                      chalk.red("Unexpected error. Please report it as a bug:")
-                    );
-                    console.log(err);
                   }
+                  console.log(
+                    chalk.red("Unexpected error. Please report it as a bug:")
+                  );
+                  console.log(err.message);
                 });
-            });
-          break;
-        case 1:
-          if (Object.keys(examples).includes(args[0])) {
-            let name: string;
+            } else {
+              flags(args[0]);
+            }
+            break;
+          case 2:
+            if (Object.keys(examples).includes(args[0])) {
+              await handler(args[0], args[1]);
+            } else {
+              flags(args[0]);
+            }
+            break;
+          default:
+            if (args.filter((x) => !supportedCommands.includes(x)).length > 0) {
+              console.log(chalk.red("Unexpected flag(s) :", args.join(" ")));
+              exit(1);
+            }
 
-            chooseName().then(async (answer) => {
-              await handler(args[0], answer);
-            });
-          } else {
-            flags(args[0]);
-          }
-          break;
-        case 2:
-          if (Object.keys(examples).includes(args[0])) {
-            await handler(args[0], args[1]);
-          } else {
-            flags(args[0]);
-          }
-          break;
-        default:
-          if (args.filter((x) => !supportedCommands.includes(x)).length > 0) {
-            console.log(chalk.red("Unexpected flag(s) :", args.join(" ")));
-            exit(1);
-          }
-
-          if (args.includes("-v") || args.includes("--version")) {
-          }
+            if (args.includes("-v") || args.includes("--version")) {
+            }
+        }
       }
-    }
-  );
-});
+    );
+  })
+  .catch((err) => {
+    console.log(chalk.red(`Error fetching latest examples: ${err.message}`));
+    exit(1);
+  });
 
 function flags(flag: string) {
   switch (flag) {
@@ -118,5 +143,9 @@ async function chooseName() {
     ])
     .then((answer) => {
       return answer.name;
+    })
+    .catch((err) => {
+      console.log(chalk.red("Unexpected error:", err));
+      exit(1);
     });
 }
