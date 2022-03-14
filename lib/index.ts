@@ -7,7 +7,6 @@ import fetch from "node-fetch";
 import { handler } from "./handler";
 import path from "path";
 import chalk from "chalk";
-import { exit } from "process";
 var generate = require("project-name-generator");
 const args = process.argv.slice(2);
 const supportedCommands: string[] = ["-v", "--version", "-h", "--help"];
@@ -94,7 +93,7 @@ fetch(
           default:
             if (args.filter((x) => !supportedCommands.includes(x)).length > 0) {
               console.log(chalk.red("Unexpected flag(s) :", args.join(" ")));
-              exit(1);
+              process.exit(1);
             }
 
             if (args.includes("-v") || args.includes("--version")) {
@@ -105,7 +104,7 @@ fetch(
   })
   .catch((err) => {
     console.log(chalk.red(`Error fetching latest examples: ${err.message}`));
-    exit(1);
+    process.exit(1);
   });
 
 function flags(flag: string) {
@@ -127,7 +126,7 @@ function flags(flag: string) {
       break;
     default:
       console.log(chalk.red("Unexpected flag:", flag));
-      exit(1);
+      process.exit(1);
   }
 }
 
@@ -146,6 +145,6 @@ async function chooseName() {
     })
     .catch((err) => {
       console.log(chalk.red("Unexpected error:", err));
-      exit(1);
+      process.exit(1);
     });
 }

@@ -25,6 +25,23 @@ export async function handler(lang: string, name: string) {
         console.clear();
         var start = new Date();
         const pathname = `${path.resolve("./")}/${name}`;
+        console.log(chalk.gray(`Directory already exists: ${pathname}`));
+        if (fs.existsSync(pathname)) {
+          await inquirer
+            .prompt([
+              {
+                type: "confirm",
+                name: "confirm",
+                message: "Overwrite?",
+                default: false,
+              },
+            ])
+            .then(async (answers) => {
+              if (!answers.confirm) {
+                process.exit(1);
+              }
+            });
+        }
         const ex = examples[lang];
         console.log(chalk.gray("Setting up..."));
         console.log(chalk.gray("Cloning repo..."));
@@ -82,6 +99,7 @@ async function download(repo: string, path: string, name: string) {
     res.body.on("error", reject);
     fileStream.on("finish", resolve);
   });
+
   fs.mkdirSync(path);
   const zip = new zipper.async({ file: `${__dirname}/${name}.zip` });
   await zip.extract(`${repo}-main`, path);
