@@ -67,18 +67,42 @@ function handler(lang, name) {
             ])
                 .then(function (answers) { return __awaiter(_this, void 0, void 0, function () {
                 var start, pathname, ex, startCommand;
+                var _this = this;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
-                            if (!answers.confirm) return [3 /*break*/, 2];
+                            if (!answers.confirm) return [3 /*break*/, 4];
                             console.clear();
                             start = new Date();
                             pathname = "".concat(path_1.default.resolve("./"), "/").concat(name);
+                            console.log(chalk_1.default.gray("Directory already exists: ".concat(pathname)));
+                            if (!fs_1.default.existsSync(pathname)) return [3 /*break*/, 2];
+                            return [4 /*yield*/, inquirer_1.default
+                                    .prompt([
+                                    {
+                                        type: "confirm",
+                                        name: "confirm",
+                                        message: "Overwrite?",
+                                        default: false,
+                                    },
+                                ])
+                                    .then(function (answers) { return __awaiter(_this, void 0, void 0, function () {
+                                    return __generator(this, function (_a) {
+                                        if (!answers.confirm) {
+                                            process.exit(1);
+                                        }
+                                        return [2 /*return*/];
+                                    });
+                                }); })];
+                        case 1:
+                            _a.sent();
+                            _a.label = 2;
+                        case 2:
                             ex = examples[lang];
                             console.log(chalk_1.default.gray("Setting up..."));
                             console.log(chalk_1.default.gray("Cloning repo..."));
                             return [4 /*yield*/, download(ex.repo, pathname, name)];
-                        case 1:
+                        case 3:
                             _a.sent();
                             console.clear();
                             console.log(chalk_1.default.gray("Setting up..."));
@@ -100,11 +124,11 @@ function handler(lang, name) {
                                 "` to get started");
                             console.log("Stuck somewhere? Join our discord at " +
                                 chalk_1.default.green("https://discord.gg/thirdweb"));
-                            return [3 /*break*/, 3];
-                        case 2:
+                            return [3 /*break*/, 5];
+                        case 4:
                             console.log(chalk_1.default.red("Operation cancelled by user"));
-                            _a.label = 3;
-                        case 3: return [2 /*return*/];
+                            _a.label = 5;
+                        case 5: return [2 /*return*/];
                     }
                 });
             }); })

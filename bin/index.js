@@ -46,7 +46,6 @@ var node_fetch_1 = __importDefault(require("node-fetch"));
 var handler_1 = require("./handler");
 var path_1 = __importDefault(require("path"));
 var chalk_1 = __importDefault(require("chalk"));
-var process_1 = require("process");
 var generate = require("project-name-generator");
 var args = process.argv.slice(2);
 var supportedCommands = ["-v", "--version", "-h", "--help"];
@@ -154,7 +153,7 @@ var examples = {};
                                 case 7:
                                     if (args.filter(function (x) { return !supportedCommands.includes(x); }).length > 0) {
                                         console.log(chalk_1.default.red("Unexpected flag(s) :", args.join(" ")));
-                                        (0, process_1.exit)(1);
+                                        process.exit(1);
                                     }
                                     if (args.includes("-v") || args.includes("--version")) {
                                     }
@@ -169,7 +168,7 @@ var examples = {};
 }); })
     .catch(function (err) {
     console.log(chalk_1.default.red("Error fetching latest examples: ".concat(err.message)));
-    (0, process_1.exit)(1);
+    process.exit(1);
 });
 function flags(flag) {
     switch (flag) {
@@ -181,7 +180,7 @@ function flags(flag) {
             break;
         default:
             console.log(chalk_1.default.red("Unexpected flag:", flag));
-            (0, process_1.exit)(1);
+            process.exit(1);
     }
 }
 function chooseName() {
@@ -202,7 +201,7 @@ function chooseName() {
                     })
                         .catch(function (err) {
                         console.log(chalk_1.default.red("Unexpected error:", err));
-                        (0, process_1.exit)(1);
+                        process.exit(1);
                     })];
                 case 1: return [2 /*return*/, _a.sent()];
             }
