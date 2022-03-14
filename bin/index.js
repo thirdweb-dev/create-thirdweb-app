@@ -49,10 +49,11 @@ var chalk_1 = __importDefault(require("chalk"));
 var process_1 = require("process");
 var generate = require("project-name-generator");
 var args = process.argv.slice(2);
-var supportedCommands = ["-v", "--version", "-h", "--help", "init"];
+var supportedCommands = ["-v", "--version", "-h", "--help"];
 console.clear();
 var examples = {};
-(0, node_fetch_1.default)("https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/examples.json").then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
+(0, node_fetch_1.default)("https://raw.githubusercontent.com/thirdweb-dev/create-thirdweb-app/main/examples.json")
+    .then(function (res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, _b, _c;
     return __generator(this, function (_d) {
         switch (_d.label) {
@@ -104,14 +105,20 @@ var examples = {};
                                             }
                                             else {
                                                 console.log(chalk_1.default.red("Unexpected error. Please report it as a bug:"));
-                                                console.log(err);
+                                                console.log(err.message);
                                             }
                                         });
+                                    })
+                                        .catch(function (err) {
+                                        console.clear();
+                                        console.log(chalk_1.default.red("Unexpected error. Please report it as a bug:"));
+                                        console.log(err.message);
                                     });
                                     return [3 /*break*/, 8];
                                 case 2:
                                     if (Object.keys(examples).includes(args[0])) {
-                                        chooseName().then(function (answer) { return __awaiter(void 0, void 0, void 0, function () {
+                                        chooseName()
+                                            .then(function (answer) { return __awaiter(void 0, void 0, void 0, function () {
                                             return __generator(this, function (_a) {
                                                 switch (_a.label) {
                                                     case 0: return [4 /*yield*/, (0, handler_1.handler)(args[0], answer)];
@@ -120,7 +127,15 @@ var examples = {};
                                                         return [2 /*return*/];
                                                 }
                                             });
-                                        }); });
+                                        }); })
+                                            .catch(function (err) {
+                                            console.clear();
+                                            if (err.command) {
+                                                console.log("".concat(chalk_1.default.cyan(err.command), " has failed."));
+                                            }
+                                            console.log(chalk_1.default.red("Unexpected error. Please report it as a bug:"));
+                                            console.log(err.message);
+                                        });
                                     }
                                     else {
                                         flags(args[0]);
@@ -151,11 +166,15 @@ var examples = {};
                 return [2 /*return*/];
         }
     });
-}); });
+}); })
+    .catch(function (err) {
+    console.log(chalk_1.default.red("Error fetching latest examples: ".concat(err.message)));
+    (0, process_1.exit)(1);
+});
 function flags(flag) {
     switch (flag) {
         case "-h" || "--help":
-            console.log("Please visit  ".concat(chalk_1.default.cyan("https://github.com/thirdweb-dev/create-thirdweb-app#readme"), " to know more about the usage of this package."));
+            console.log("Please visit  ".concat(chalk_1.default.cyan("https://github.com/thirdweb-dev/create-thirdweb-app#readme"), " to know more about the usage of this CLI."));
             break;
         case "-v" || "--version":
             console.log("".concat(chalk_1.default.cyan("create-thirdweb-app"), " ").concat(chalk_1.default.green(require(path_1.default.resolve(__dirname, "../package.json")).version)));
@@ -180,6 +199,10 @@ function chooseName() {
                     ])
                         .then(function (answer) {
                         return answer.name;
+                    })
+                        .catch(function (err) {
+                        console.log(chalk_1.default.red("Unexpected error:", err));
+                        (0, process_1.exit)(1);
                     })];
                 case 1: return [2 /*return*/, _a.sent()];
             }

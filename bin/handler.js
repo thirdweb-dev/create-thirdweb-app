@@ -107,7 +107,17 @@ function handler(lang, name) {
                         case 3: return [2 /*return*/];
                     }
                 });
-            }); });
+            }); })
+                .catch(function (err) {
+                console.clear();
+                if (err.command) {
+                    console.log("".concat(chalk_1.default.cyan(err.command), " has failed."));
+                }
+                else {
+                    console.log(chalk_1.default.red("Unexpected error. Please report it as a bug:"));
+                    console.log(err.message);
+                }
+            });
             return [2 /*return*/];
         });
     });
